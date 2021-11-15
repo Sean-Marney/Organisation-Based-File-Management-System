@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+// Entity class is responsible for mapping data to a table in the database (similar to DTO, except DTO is not mapped to a table like entity classes are)
+
 @Entity
 @Table(name = "files")
 @Data
