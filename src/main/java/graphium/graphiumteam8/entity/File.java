@@ -1,0 +1,22 @@
+package graphium.graphiumteam8.entity;
+
+import lombok.Data;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "files")
+@Data
+public class File {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @Column(name = "file_name")
+    private String fileName;
+
+    @Column(name = "file_object")
+    @Lob // Allows us to store a file object in table
+    private byte[] fileObject;
+}
