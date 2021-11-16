@@ -2,6 +2,7 @@ package graphium.graphiumteam8.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 // Home controller is responsible for viewing the index page
 
@@ -12,5 +13,9 @@ public class HomeController {
     public String index(){
         return "index";
     }
-    
+
+    @GetMapping("/file-system")
+    public ModelAndView uploadFile(){
+        return new ModelAndView("file-upload-download");
+    }
 }
