@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FileDAO extends CrudRepository<File, Long> {
 
+    // Finds entry using keywords 'findBy' and then will find that column in the database
+    File findByFileName(String fileName);
 }

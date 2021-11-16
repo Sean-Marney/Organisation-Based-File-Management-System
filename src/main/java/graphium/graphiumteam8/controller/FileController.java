@@ -4,13 +4,15 @@ import graphium.graphiumteam8.dto.FileUploadDetailsDTO;
 import graphium.graphiumteam8.entity.File;
 import graphium.graphiumteam8.repository.FileDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -19,7 +21,7 @@ public class FileController {
 
     @Autowired FileDAO fileDAO;
 
-    // Endpoint allows user to select their own file and upload it to the database
+    // This endpoint allows user to select their own file and upload it to the database
     @PostMapping("/upload")
     FileUploadDetailsDTO fileUpload(@RequestParam("file")MultipartFile file) throws IOException { // MultipartFile allows for file upload as "file"
 
@@ -41,6 +43,21 @@ public class FileController {
         newFile.setFileObject(file.getBytes());
         fileDAO.save(newFile);
 
-        return new FileUploadDetailsDTO(name, fileType, url); // Sends user's file to database
+        return new FileUploadDetailsDTO(name, fileType, url); // Returns the user's file
     }
+
+    // This endpoint allows the user to download/view a file from the database by its file name
+    @GetMapping("/download/{fileName}")
+    ResponseEntity<byte[]> downloadFile(@PathVariable String fileName, HttpServletRequest httpServletRequest){
+
+        File file = fileDAO.findByFileName(fileName);
+
+        String mediaType = httpServletRequest.getServletContext().getMimeType(file.getFileName());
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(mediaType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline;fileName=" + file.getFileName()) // Renders file to browser (inline)
+                .body(file.getFileObject());
+    }
+
 }
