@@ -41,7 +41,7 @@ public class FileController {
         File newFile = new File();
         newFile.setFileName(name);
         newFile.setFileObject(file.getBytes());
-        fileDAO.save(newFile);
+        fileDAO.save(newFile); // Saves file to database
 
         return new FileUploadDetailsDTO(name, fileType, url); // Returns the user's file
     }
