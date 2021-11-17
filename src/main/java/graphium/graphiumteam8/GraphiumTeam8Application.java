@@ -9,5 +9,4 @@ public class GraphiumTeam8Application {
     public static void main(String[] args) {
         SpringApplication.run(GraphiumTeam8Application.class, args);
     }
-
 }

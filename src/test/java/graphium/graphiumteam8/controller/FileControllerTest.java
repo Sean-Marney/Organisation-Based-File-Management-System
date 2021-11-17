@@ -2,6 +2,7 @@ package graphium.graphiumteam8.controller;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,5 +32,6 @@ public class FileControllerTest {
         this.mockMvc.perform(MockMvcRequestBuilders.multipart("/upload")
                 .file(mockMultipartFile))
                 .andExpect(MockMvcResultMatchers.status().isOk()); // Checks status is OK (HTTP response = 200)
+
     }
 }

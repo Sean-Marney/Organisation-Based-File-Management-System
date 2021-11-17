@@ -16,6 +16,6 @@ public class HomeController {
 
     @GetMapping("/file-system")
     public ModelAndView uploadFile(){
-        return new ModelAndView("file-upload-download");
+        return new ModelAndView("file-system");
     }
 }
