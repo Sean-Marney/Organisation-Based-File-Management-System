@@ -19,4 +19,5 @@ public interface FileDAO extends CrudRepository<File, Long> {
     @Query(value = "SELECT * FROM files WHERE MATCH (file_name) AGAINST (?1);", // ?1 will be replaced by searchTerm
             nativeQuery = true)
     List<File> fileSearch(String searchTerm);
+
 }

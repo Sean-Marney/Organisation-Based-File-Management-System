@@ -12,6 +12,8 @@
     <h2>Search results for '[[${searchTerm}]]'</h2>
 </div>
 
+<!--Creates link for every file in search result, but since fileName is only set if user uploads
+    during that session, all links go to the same place (either the same file, or null-->
 <div th:each="file : ${searchResult}">
 
     <a th:href="@{/download/} + ${fileName}" th:title="${fileName}">link to file</a>

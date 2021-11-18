@@ -21,7 +21,7 @@
 <div>
     <h2>File Search</h2>
 
-    <form th:action="@{/fileSearch}" method="get">
+    <form th:action="@{/fileSearch}" method="get" enctype="multipart/form-data">
         <label>
             <input type="search" name="searchTerm" size="30" placeholder="Search for a file" required
             th:value="${searchTerm}">

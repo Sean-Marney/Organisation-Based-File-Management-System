@@ -18,4 +18,9 @@ public class HomeController {
     public ModelAndView uploadFile(){
         return new ModelAndView("file-system");
     }
+
+    @GetMapping("/view-all-files")
+    public ModelAndView viewAllFiles(){
+        return new ModelAndView("view-all-files");
+    }
 }

@@ -2,7 +2,6 @@ package graphium.graphiumteam8.service;
 
 import graphium.graphiumteam8.entity.File;
 import graphium.graphiumteam8.repository.FileDAO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
