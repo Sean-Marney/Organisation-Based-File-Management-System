@@ -10,13 +10,19 @@
 
 <!--List of file names from database-->
 <div>
-    <table>
+    <table class="table">
         <thead>
-        <tr><b>File name</b></tr>
+        <th scope="col"><b>File Names</b></th>
+        <th scope="col"><b>Files</b></th>
         </thead>
         <tbody>
         <tr th:each="file : ${listOfFileNames}">
             <td th:text="${file}"></td>
+            <td>
+                <a th:href="@{/files/view/} + ${file}">View</a>
+                <a href="/">Download</a>
+            </td>
+
         </tr>
         </tbody>
     </table>

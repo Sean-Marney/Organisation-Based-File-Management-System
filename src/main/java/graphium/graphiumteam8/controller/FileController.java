@@ -5,6 +5,7 @@ import graphium.graphiumteam8.repository.FileDAO;
 import graphium.graphiumteam8.service.FileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,13 +67,18 @@ public class FileController {
         return "redirect:/download/" + name; // Displays file from the browser
     }
 
+    // Returns list of file names from database as its is needed in URL to download correlating file
+    @GetMapping("/files")
+    public String getFiles(Model model){
 
+        List<String> listOfFileNames = fileService.listFileNames();
+        model.addAttribute("listOfFileNames", listOfFileNames);
 
+        return "files";
+    }
 
-    // TODO Stop using this endpoint for downloading list of files, it is just to get the file that has been uploaded - create another endpoint for getting files from database
-    // TODO YOU CAN GET FROM DB BY ID findById ?? maybe
     // This endpoint allows the user to download/view a file from the database by its file name
-    @GetMapping("/download/{fileName}")
+    @GetMapping("/files/view/{fileName}")
     ResponseEntity<byte[]> downloadFile(@PathVariable String fileName, HttpServletRequest httpServletRequest) {
 
         // File name is null from the start of this method
@@ -86,27 +94,6 @@ public class FileController {
                 .body(file.getFileObject());
     }
 
-    // Returns list of file names from database as its is needed in URL to download correlating file
-    @GetMapping("/files")
-    public String getFiles(Model model){
-
-        List<String> listOfFileNames = fileService.listFileNames();
-        model.addAttribute("listOfFileNames", listOfFileNames);
-
-        return "files";
-    }
-
-    /*
-
-    @GetMapping("/viewFiles")
-    public String viewFiles(Model model){
-
-        List<File[]> fileList = fileDAO.findFiles();
-        model.addAttribute("fileList", fileList);
-
-        return "view-all-files";
-    }
-
     // TODO (major) Returns /download/null instead of returning the file due to file name=null
     @GetMapping("/fileSearch")
     public String fileSearch(@Param("searchTerm") String searchTerm, Model model){
@@ -120,6 +107,7 @@ public class FileController {
         return "file-search-results";
     }
 
+    /*
     @GetMapping("/file-download")
     public void fileDownload(HttpServletResponse httpServletResponse) throws IOException {
 
