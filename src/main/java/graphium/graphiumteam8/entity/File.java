@@ -19,6 +19,6 @@ public class File {
     private String fileName;
 
     @Column(name = "file_object")
-    @Lob // Allows us to store a file object in table
+    @Lob // Allows file object storage in table
     private byte[] fileObject;
 }

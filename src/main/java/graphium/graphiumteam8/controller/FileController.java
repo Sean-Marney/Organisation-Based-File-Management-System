@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
@@ -37,6 +39,7 @@ public class FileController {
 
         // Getting file name
         String name = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
+        System.out.println("TEST: + " +name);
 
         // Getting file type
         String fileType = file.getContentType();
@@ -56,31 +59,43 @@ public class FileController {
         return "redirect:/download/" + name; // Displays file from the browser
     }
 
-    // TODO: (minor) NonUniqueResultException when file already exists
+
+
+
+    // TODO Stop using this endpoint for downloading list of files, it is just to get the file that has been uploaded - create another endpoint for getting files from database
+    // TODO YOU CAN GET FROM DB BY ID findById ?? maybe
     // This endpoint allows the user to download/view a file from the database by its file name
     @GetMapping("/download/{fileName}")
     ResponseEntity<byte[]> downloadFile(@PathVariable String fileName, HttpServletRequest httpServletRequest) {
 
-         File file = fileDAO.findByFileName(fileName);
+        // File name is null from the start of this method
+        // Need to get names from database, not previous variables... Why would that work?
+        File file = fileDAO.findByFileName(fileName);
+        System.out.println("TEST: + " +fileName);
 
         String mediaType = httpServletRequest.getServletContext().getMimeType(file.getFileName());
 
+        // Returns browser view of file that was just uploaded to database
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(mediaType))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "inline;fileName=" + file.getFileName()) // Renders file to browser (inline)
                 .body(file.getFileObject());
     }
 
+
+
     /*
+
     @GetMapping("/viewFiles")
-    public String viewFiles(){
-        List<File> fileList = fileDAO.listAllFiles();
+    public String viewFiles(Model model){
+
+        List<File[]> fileList = fileDAO.findFiles();
+        model.addAttribute("fileList", fileList);
+
+        return "view-all-files";
     }
-     */
 
-
-
-    // TODO (major) Returns /download/null instead of returning the file
+    // TODO (major) Returns /download/null instead of returning the file due to file name=null
     @GetMapping("/fileSearch")
     public String fileSearch(@Param("searchTerm") String searchTerm, Model model){
 
@@ -92,4 +107,26 @@ public class FileController {
 
         return "file-search-results";
     }
+
+    @GetMapping("/file-download")
+    public void fileDownload(HttpServletResponse httpServletResponse) throws IOException {
+
+        // Google iterating through records in DB
+        // For each file in table
+        // Set fileId to correlating database id
+        Long fileId = 2008L;
+        File file = fileDAO.findById(fileId).get();
+
+        httpServletResponse.setContentType("application/octet-stream"); // Download file, not open
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=" + file.getFileName();
+        httpServletResponse.setHeader(headerKey, headerValue);
+
+        ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
+
+        // Writing content of file to the output stream
+        servletOutputStream.write(file.getFileObject());
+    }
+
+     */
 }
