@@ -3,8 +3,10 @@ package graphium.graphiumteam8.controller;
 import graphium.graphiumteam8.entity.File;
 import graphium.graphiumteam8.repository.FileDAO;
 import graphium.graphiumteam8.service.FileService;
-import org.springframework.data.repository.query.Param;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,15 +16,18 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Objects;
+
+// Controller should not have business logic (change this)
 
 @Controller
 public class FileController {
+
 
     private final FileService fileService;
     private final FileDAO fileDAO;
@@ -71,7 +76,6 @@ public class FileController {
         // File name is null from the start of this method
         // Need to get names from database, not previous variables... Why would that work?
         File file = fileDAO.findByFileName(fileName);
-        System.out.println("TEST: + " +fileName);
 
         String mediaType = httpServletRequest.getServletContext().getMimeType(file.getFileName());
 
@@ -82,7 +86,15 @@ public class FileController {
                 .body(file.getFileObject());
     }
 
+    // Returns list of file names from database as its is needed in URL to download correlating file
+    @GetMapping("/files")
+    public String getFiles(Model model){
 
+        List<String> listOfFileNames = fileService.listFileNames();
+        model.addAttribute("listOfFileNames", listOfFileNames);
+
+        return "files";
+    }
 
     /*
 
