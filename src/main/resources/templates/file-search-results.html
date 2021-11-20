@@ -8,15 +8,26 @@
 </head>
 <body>
 
-<div>
-    <h2>Search results for '[[${searchTerm}]]'</h2>
-</div>
-
 <!--Creates link for every file in search result, but since fileName is only set if user uploads
     during that session, all links go to the same place (either the same file, or null-->
-<div th:each="file : ${searchResult}">
+<div>
+    <h2>Search results for '[[${searchTerm}]]'</h2>
 
-    <a th:href="@{/download/} + ${fileName}" th:title="${fileName}">link to file</a>
+    <table>
+        <thead>
+        <th></th>
+        <th>Search Result</th>
+        </thead>
+        <tbody>
+        <tr th:each="file : ${searchResult}">
+            <td th:text="${fileName}"></td>
+            <td>
+                <a th:href="@{/files/view/} + ${fileName}">View</a>
+                <a th:href="@{/files/download} + ${fileName}">Download</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
 </div>
 

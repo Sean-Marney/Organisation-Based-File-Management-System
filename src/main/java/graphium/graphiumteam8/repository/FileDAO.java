@@ -15,13 +15,11 @@ public interface FileDAO extends JpaRepository<File, Long> {
     // Finds entry using keywords 'findBy' and then will find that column in the database
     File findByFileName(String fileName);
 
+    // Finder method - JPA deals with the SQL so no query is required (implemented in service class)
+    List<File> findAll(); // Get all records from file table
+
     // SQL query to search for a file
     @Query(value = "SELECT * FROM files WHERE MATCH (file_name) AGAINST (?1)", // ?1 will be replaced by searchTerm
             nativeQuery = true)
     List<File> fileSearch(String searchTerm);
-
-    // Finder method - JPA deals with the SQL so no query is required (implemented in service class)
-    List<File> findAll(); // Get all records from file table
-
-
 }

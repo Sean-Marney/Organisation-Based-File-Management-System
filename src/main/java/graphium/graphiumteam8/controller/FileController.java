@@ -3,34 +3,27 @@ package graphium.graphiumteam8.controller;
 import graphium.graphiumteam8.entity.File;
 import graphium.graphiumteam8.repository.FileDAO;
 import graphium.graphiumteam8.service.FileService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Objects;
-
-// Controller should not have business logic (change this)
 
 @Controller
 public class FileController {
-
 
     private final FileService fileService;
     private final FileDAO fileDAO;
@@ -64,7 +57,8 @@ public class FileController {
         newFile.setFileObject(file.getBytes());
         fileDAO.save(newFile); // Saves file to database
 
-        return "redirect:/download/" + name; // Displays file from the browser
+        //return "redirect:/files/view/" + name; // Displays file from the browser
+        return "redirect:/files";
     }
 
     // Returns list of file names from database as its is needed in URL to download correlating file
@@ -79,10 +73,8 @@ public class FileController {
 
     // This endpoint allows the user to download/view a file from the database by its file name
     @GetMapping("/files/view/{fileName}")
-    ResponseEntity<byte[]> downloadFile(@PathVariable String fileName, HttpServletRequest httpServletRequest) {
+    ResponseEntity<byte[]> viewFile(@PathVariable String fileName, HttpServletRequest httpServletRequest) {
 
-        // File name is null from the start of this method
-        // Need to get names from database, not previous variables... Why would that work?
         File file = fileDAO.findByFileName(fileName);
 
         String mediaType = httpServletRequest.getServletContext().getMimeType(file.getFileName());
@@ -94,8 +86,22 @@ public class FileController {
                 .body(file.getFileObject());
     }
 
-    // TODO (major) Returns /download/null instead of returning the file due to file name=null
-    @GetMapping("/fileSearch")
+    @GetMapping("/files/download/{fileName}")
+    ResponseEntity<byte[]> downloadFile(@PathVariable String fileName, HttpServletRequest httpServletRequest){
+
+        File file = fileDAO.findByFileName(fileName);
+
+        String mediaType = httpServletRequest.getServletContext().getMimeType(file.getFileName());
+
+        // Returns download attachment instead of browser view of the file
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(mediaType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;fileName=" + file.getFileName())
+                .body(file.getFileObject());
+    }
+
+    // TODO Currently not working properly
+    @GetMapping("/files/search")
     public String fileSearch(@Param("searchTerm") String searchTerm, Model model){
 
         List<File> searchResult = fileService.fileSearch(searchTerm);
@@ -106,27 +112,4 @@ public class FileController {
 
         return "file-search-results";
     }
-
-    /*
-    @GetMapping("/file-download")
-    public void fileDownload(HttpServletResponse httpServletResponse) throws IOException {
-
-        // Google iterating through records in DB
-        // For each file in table
-        // Set fileId to correlating database id
-        Long fileId = 2008L;
-        File file = fileDAO.findById(fileId).get();
-
-        httpServletResponse.setContentType("application/octet-stream"); // Download file, not open
-        String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=" + file.getFileName();
-        httpServletResponse.setHeader(headerKey, headerValue);
-
-        ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
-
-        // Writing content of file to the output stream
-        servletOutputStream.write(file.getFileObject());
-    }
-
-     */
 }
