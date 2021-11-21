@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Files</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body>
 
 <!--Form to upload files to database-->
-    <div>
+    <div class="upload">
         <h3>File Upload</h3>
 
         <form action="/upload" method="post" enctype="multipart/form-data">
@@ -19,7 +20,7 @@
     </div>
 
 <!--Form to search for files-->
-<div>
+<div class="search">
     <h2>File Search</h2>
 
     <form th:action="@{/files/search}" method="get" enctype="multipart/form-data">
@@ -32,13 +33,15 @@
 </div>
 
 <!--All files from database (viewable/downloadable)-->
-<div>
+<div class="download">
     <h3>View files</h3>
 
-    <table class="table">
+    <table class="table table-stripped">
         <thead>
-        <th scope="col"><b>File Names</b></th>
-        <th scope="col"><b>Files</b></th>
+        <tr>
+            <th scope="col"><b>File Names</b></th>
+            <th scope="col"><b>Files</b></th>
+        </tr>
         </thead>
         <tbody>
         <tr th:each="file : ${listOfFileNames}">

@@ -1,0 +1,25 @@
+html, body {
+    height: 100%;
+}
+
+html {
+    display: table;
+    margin: auto;
+}
+
+body {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.upload {
+    padding: 25px;
+}
+
+.search {
+    padding: 25px;
+}
+
+.download {
+    padding: 25px;
+}
