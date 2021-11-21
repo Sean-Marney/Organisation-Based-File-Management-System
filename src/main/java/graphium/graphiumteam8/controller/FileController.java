@@ -10,17 +10,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Controller
 public class FileController {
@@ -36,11 +35,11 @@ public class FileController {
 
     // This endpoint allows user to select their own file and upload it to the database
     @PostMapping("/upload")
-    String fileUpload(@RequestParam("file") MultipartFile file) throws IOException { // MultipartFile allows for file upload as "file"
+    String fileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) throws IOException { // MultipartFile allows for file upload as "file"
 
         // Getting file name
         String name = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
-        System.out.println("TEST: + " +name);
+        System.out.println("TEST: + " + name);
 
         // Getting file type
         String fileType = file.getContentType();
@@ -57,13 +56,16 @@ public class FileController {
         newFile.setFileObject(file.getBytes());
         fileDAO.save(newFile); // Saves file to database
 
+        // Alert box after successful upload
+        redirectAttributes.addFlashAttribute("uploadMessage", "File upload successful");
+
         //return "redirect:/files/view/" + name; // Displays file from the browser
         return "redirect:/files";
     }
 
     // Returns list of file names from database as its is needed in URL to download correlating file
     @GetMapping("/files")
-    public String getFiles(Model model){
+    public String getFiles(Model model) {
 
         List<String> listOfFileNames = fileService.listFileNames();
         model.addAttribute("listOfFileNames", listOfFileNames);
@@ -77,6 +79,7 @@ public class FileController {
 
         File file = fileDAO.findByFileName(fileName);
 
+        // Stores file type
         String mediaType = httpServletRequest.getServletContext().getMimeType(file.getFileName());
 
         // Returns browser view of file that was just uploaded to database
@@ -87,10 +90,11 @@ public class FileController {
     }
 
     @GetMapping("/files/download/{fileName}")
-    ResponseEntity<byte[]> downloadFile(@PathVariable String fileName, HttpServletRequest httpServletRequest){
+    ResponseEntity<byte[]> downloadFile(@PathVariable String fileName, HttpServletRequest httpServletRequest) {
 
         File file = fileDAO.findByFileName(fileName);
 
+        // Stores file type
         String mediaType = httpServletRequest.getServletContext().getMimeType(file.getFileName());
 
         // Returns download attachment instead of browser view of the file

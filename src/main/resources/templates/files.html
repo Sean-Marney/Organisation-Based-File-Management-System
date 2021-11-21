@@ -10,13 +10,16 @@
 
 <!--Form to upload files to database-->
     <div class="upload">
-        <h3>File Upload</h3>
+        <h2>File Upload</h2>
 
         <form action="/upload" method="post" enctype="multipart/form-data">
             Upload File:
             <input type="file" name="file">
             <input type="submit" value="Upload">
         </form>
+
+        <h6 th:text="${uploadMessage}" style="color: green"></h6>
+
     </div>
 
 <!--Form to search for files-->
@@ -34,7 +37,7 @@
 
 <!--All files from database (viewable/downloadable)-->
 <div class="download">
-    <h3>View files</h3>
+    <h2>View files</h2>
 
     <table class="table table-stripped">
         <thead>
