@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${pageTitle}]]</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+<body>
+
+<!--Creates link for every file in search result, but since fileName is only set if user uploads
+    during that session, all links go to the same place (either the same file, or null-->
+<div>
+    <h2>Search results for '[[${searchTerm}]]'</h2>
+
+    <table>
+        <thead>
+        <th></th>
+        <th>Search Result</th>
+        </thead>
+        <tbody>
+        <tr th:each="file : ${searchResult}">
+            <td th:text="${fileName}"></td>
+            <td>
+                <a th:href="@{/files/view/} + ${fileName}">View</a>
+                <a th:href="@{/files/download} + ${fileName}">Download</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
