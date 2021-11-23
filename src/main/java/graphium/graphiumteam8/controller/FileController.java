@@ -1,5 +1,6 @@
 package graphium.graphiumteam8.controller;
 
+import graphium.graphiumteam8.controller.forms.SetFileAccessForm;
 import graphium.graphiumteam8.entity.File;
 import graphium.graphiumteam8.repository.FileDAO;
 import graphium.graphiumteam8.service.FileService;
@@ -39,7 +40,7 @@ public class FileController {
 
         // Getting file name
         String name = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
-        System.out.println("TEST: + " + name);
+        System.out.println("Log: fileName is " + name);
 
         // Getting file type
         String fileType = file.getContentType();
@@ -61,6 +62,40 @@ public class FileController {
 
         //return "redirect:/files/view/" + name; // Displays file from the browser
         return "redirect:/files/upload";
+    }
+
+    // Returns file access form
+    @GetMapping("/files/file-access/{fileName}")
+    public String fileAccessForm(@PathVariable String fileName, Model model){
+
+        model.addAttribute("setFileAccessForm", new SetFileAccessForm());
+
+        return "file-access";
+    }
+
+    @PostMapping("/files/file-access/{fileName}")
+    public String fileAccessFormSubmit(@PathVariable String fileName, @ModelAttribute SetFileAccessForm setFileAccessForm, Model model){
+        model.addAttribute("setFileAccessForm", setFileAccessForm);
+
+        File file = fileDAO.findByFileName(fileName);
+
+        if (setFileAccessForm.getFileAccessEveryone().equals("choiceEveryone")){
+            fileService.setFileAccessToEveryone();
+        } else if
+        (setFileAccessForm.getFileAccessMyOrganisation().equals("choiceMyOrganisation")){
+            fileService.setFileAccessToMyOrganisation();
+        } else if
+        (setFileAccessForm.getFileAccessOtherOrganisation().equals("choiceOtherOrganisation")){
+            fileService.setFileAccessToOtherOrganisation();
+        } else if
+        (setFileAccessForm.getFileAccessSpecificUser().equals("choiceSpecificUser")){
+            fileService.setFileAccessToSpecificUser();
+        } else if
+        (setFileAccessForm.getFileAccessMyself().equals("choiceMyself")){
+            fileService.setFileAccessToMyself();
+        }
+
+        return "file-access-results";
     }
 
     // This endpoint allows the user to download/view a file from the database by its file name

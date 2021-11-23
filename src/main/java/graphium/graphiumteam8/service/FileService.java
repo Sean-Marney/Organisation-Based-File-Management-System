@@ -1,5 +1,6 @@
 package graphium.graphiumteam8.service;
 
+import graphium.graphiumteam8.controller.forms.SetFileAccessForm;
 import graphium.graphiumteam8.entity.File;
 import graphium.graphiumteam8.repository.FileDAO;
 import org.springframework.stereotype.Service;
@@ -42,4 +43,30 @@ public class FileService{
 
         return fileDAO.fileSearch(searchTerm);
     }
+
+    public String setFileAccessToEveryone(){
+        String log = "setFileAccessToEveryone";
+        return log;
+    }
+
+    public String setFileAccessToMyOrganisation(){
+        String log = "setFileAccessToMyOrganisation";
+        return log;
+    }
+
+    public String setFileAccessToOtherOrganisation(){
+        String log = "setFileAccessToOtherOrganisation";
+        return log;
+    }
+
+    public String setFileAccessToSpecificUser(){
+        String log = "setFileAccessToSpecificUser";
+        return log;
+    }
+
+    public String setFileAccessToMyself(){
+        String log = "setFileAccessToMyself";
+        return log;
+    }
+
 }

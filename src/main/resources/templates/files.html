@@ -7,6 +7,8 @@
 </head>
 <body>
 
+<!--Trying to make file system compact and making everything easily accessible so functions are close by-->
+
 <!--All files from database (viewable/downloadable)-->
 <div class="download">
     <h2>Your files:</h2>
@@ -24,7 +26,7 @@
             <td>
                 <a class="mr-3" th:href="@{/files/view/} + ${file}">View</a>
                 <a class="mr-3" th:href="@{/files/download/} + ${file}">Download</a>
-                <a th:href="@{/files/send/}">Send to User</a>
+                <a th:href="@{/files/file-access/} + ${file}">Set File Access</a>
             </td>
         </tr>
         </tbody>
