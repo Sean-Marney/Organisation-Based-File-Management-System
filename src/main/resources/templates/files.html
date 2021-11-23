@@ -9,7 +9,7 @@
 
 <!--All files from database (viewable/downloadable)-->
 <div class="download">
-    <h2>Username123's files:</h2>
+    <h2>Your files:</h2>
 
     <table class="table table-stripped">
         <thead>
@@ -24,7 +24,7 @@
             <td>
                 <a class="mr-3" th:href="@{/files/view/} + ${file}">View</a>
                 <a class="mr-3" th:href="@{/files/download/} + ${file}">Download</a>
-                <a th:href="@{/files/share/} + ${file}">Share</a>
+                <a th:href="@{/files/send/}">Send to User</a>
             </td>
         </tr>
         </tbody>

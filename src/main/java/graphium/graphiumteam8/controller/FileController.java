@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
+// Controller for functionality of the file system
+
 @Controller
 public class FileController {
 
@@ -30,7 +32,6 @@ public class FileController {
         this.fileDAO = fileDAO;
         this.fileService = fileService;
     }
-
 
     // This endpoint allows user to select their own file and upload it to the database
     @PostMapping("/upload")
@@ -60,22 +61,6 @@ public class FileController {
 
         //return "redirect:/files/view/" + name; // Displays file from the browser
         return "redirect:/files/upload";
-    }
-
-    // Returns list of file names from database as its is needed in URL to download correlating file
-    @GetMapping("/files") // TODO "/files/{username}"
-    public String getFiles(Model model) {
-
-        List<String> listOfFileNames = fileService.listFileNames();
-        model.addAttribute("listOfFileNames", listOfFileNames);
-
-        return "files";
-    }
-
-    @GetMapping("/files/upload")
-    public String getUploadForm(){
-
-        return "file-upload";
     }
 
     // This endpoint allows the user to download/view a file from the database by its file name
