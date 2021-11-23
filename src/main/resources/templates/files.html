@@ -4,40 +4,12 @@
     <meta charset="UTF-8">
     <title>Files</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body>
 
-<!--Form to upload files to database-->
-    <div class="upload">
-        <h2>File Upload</h2>
-
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            Upload File:
-            <input type="file" name="file">
-            <input type="submit" value="Upload">
-        </form>
-
-        <h6 th:text="${uploadMessage}" style="color: green"></h6>
-
-    </div>
-
-<!--Form to search for files-->
-<div class="search">
-    <h2>File Search</h2>
-
-    <form th:action="@{/files/search}" method="get" enctype="multipart/form-data">
-        <label>
-            <input type="search" name="searchTerm" size="30" placeholder="Search for a file" required
-                   th:value="${searchTerm}">
-        </label>
-        <input type="submit" value="Search">
-    </form>
-</div>
-
 <!--All files from database (viewable/downloadable)-->
 <div class="download">
-    <h2>View files</h2>
+    <h2>Username123's files:</h2>
 
     <table class="table table-stripped">
         <thead>
@@ -52,12 +24,27 @@
             <td>
                 <a class="mr-3" th:href="@{/files/view/} + ${file}">View</a>
                 <a class="mr-3" th:href="@{/files/download/} + ${file}">Download</a>
-                <a th:href="@{/files/delete/} + ${file}">Delete</a>
+                <a th:href="@{/files/share/} + ${file}">Share</a>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
+
+<!--Form to search for files-->
+<!--
+<div class="search">
+    <h2>File Search</h2>
+
+    <form th:action="@{/files/search}" method="get" enctype="multipart/form-data">
+        <label>
+            <input type="search" name="searchTerm" size="30" placeholder="Search for a file" required
+                   th:value="${searchTerm}">
+        </label>
+        <input type="submit" value="Search">
+    </form>
+</div>
+<--.-->
 
 </body>
 </html>

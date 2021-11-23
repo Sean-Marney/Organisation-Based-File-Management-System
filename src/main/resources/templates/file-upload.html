@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>File Upload</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<!--Form to upload files to database-->
+<div class="upload">
+    <h2>File Upload</h2>
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        Upload File:
+        <input type="file" name="file">
+        <input type="submit" value="Upload">
+    </form>
+
+    <h6 th:text="${uploadMessage}" style="color: green"></h6>
+</div>
+
+</body>
+</html>

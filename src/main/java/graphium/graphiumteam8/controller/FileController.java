@@ -59,17 +59,23 @@ public class FileController {
         redirectAttributes.addFlashAttribute("uploadMessage", "File upload successful");
 
         //return "redirect:/files/view/" + name; // Displays file from the browser
-        return "redirect:/files";
+        return "redirect:/files/upload";
     }
 
     // Returns list of file names from database as its is needed in URL to download correlating file
-    @GetMapping("/files")
+    @GetMapping("/files") // TODO "/files/{username}"
     public String getFiles(Model model) {
 
         List<String> listOfFileNames = fileService.listFileNames();
         model.addAttribute("listOfFileNames", listOfFileNames);
 
         return "files";
+    }
+
+    @GetMapping("/files/upload")
+    public String getUploadForm(){
+
+        return "file-upload";
     }
 
     // This endpoint allows the user to download/view a file from the database by its file name
@@ -102,6 +108,8 @@ public class FileController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;fileName=" + file.getFileName())
                 .body(file.getFileObject());
     }
+
+    // File share
 
     // TODO Currently not working properly
     @GetMapping("/files/search")
