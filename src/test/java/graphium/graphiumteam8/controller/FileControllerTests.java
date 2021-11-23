@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class FileControllerTest {
+public class FileControllerTests {
 
     @Autowired MockMvc mockMvc;
 
@@ -27,11 +27,26 @@ public class FileControllerTest {
                 "test-file.txt",
                 "text/plain",
                 "Content"
-                        .getBytes());
+                        .getBytes()
+        );
         // MockMvc passes the mock file through the /upload endpoint
         this.mockMvc.perform(MockMvcRequestBuilders.multipart("/upload")
                 .file(mockMultipartFile))
                 .andExpect(MockMvcResultMatchers.status().isOk()); // Checks status is OK (HTTP response = 200)
 
+    }
+
+    @Test
+    @DisplayName("File download test")
+    void shouldDownloadAFile(){
+
+        MockMultipartFile mockMultipartFile = new MockMultipartFile(
+                "file",
+                "test-file.txt",
+                "text/plain",
+                "Content"
+                .getBytes()
+        );
+        this.mockMvc.perform(MockMvcRequestBuilders.multipart("/download"))
     }
 }
