@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -28,12 +29,12 @@ public class AccountForm {
     @Size(min = 2, max = 60, message = "The last name of the user must be between 2 and 60 characters.")
     private String lastName;
 
-    @NotEmpty(message = "The organisation name of the user must be between 2 and 60 characters.")
-    @Size(min = 2, max = 60, message = "The organisation name of the user must be between 2 and 60 characters.")
-    private String organisation;
+    @NotEmpty(message = "The username of the user must be between 2 and 60 characters.")
+    @Size(min = 2, max = 60, message = "The username of the user must be between 2 and 60 characters.")
+    private String username;
 
-    @NotEmpty(message = "")
-    @Size(message = "")
+    @NotEmpty(message = "The email of the user must be provided")
+    @Email
     private String email;
 
     @NotEmpty(message = "")
@@ -43,4 +44,7 @@ public class AccountForm {
     @NotEmpty(message = "")
     @Size(message = "")
     private String confirmPassword;
+
+    @NotEmpty(message = "The organisation name of the user must be between 2 and 60 characters.")
+    private String organisation;
 }

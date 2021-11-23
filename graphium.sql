@@ -10,10 +10,48 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 DROP SCHEMA IF EXISTS `graphium` ;
 -- -----------------------------------------------------
--- Schema rowing
+-- Schema graphium
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `graphium` DEFAULT CHARACTER SET utf8 ;
 USE `graphium` ;
+-- -----------------------------------------------------
+-- Table `graphium`.`user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `graphium`.`user` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(200) NULL DEFAULT NULL,
+  `organisation` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC) )
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8;
+-- -----------------------------------------------------
+-- Table `graphium`.`organisation`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `graphium`.`organisation` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `organisation` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(200) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `organisation_UNIQUE` (`organisation` ASC) )
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8;
+-- -----------------------------------------------------
+-- Table `graphium`.`admin`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `graphium`.`admin` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(200) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC) )
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8;
+
 
 DELIMITER ;
 SET SQL_MODE=@OLD_SQL_MODE;

@@ -2,29 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Login</title>
 </head>
 <body>
 
-
+<div>
 <!-- Login form for the user to sign in to there account and access  -->
-<form name="login" class="text-center border border-light p-5" th:action="" method="post">
+
+    <p th:if="${loginErrror}" class="error"></p>
+<!--<form name="login" class="text-center border border-light p-5" >-->
+    <form name="login" class="text-center border border-light p-5" th:action="@{/login}" method="post">
     <fieldset>
         <legend class="h4 mb-4">Sign in</legend>
         <div th:if="${param.error}" class="alert alert-error">
+            <span th:text="#{login.error}"/>
             Invalid username or password.
         </div>
-        <label for="username">Username</label>
+<!--        <label for="username">Username</label>-->
         <input type="text" id="username" name="username" class="form-control mb-4" placeholder="Username">
-        <label for="password">Password</label>
+        <br>
+<!--        <label for="password">Password</label>-->
         <input type="password" id="password" name="password" class="form-control mb-4" placeholder="Password">
 
         <button class="btn btn-block my-4 btn-primary" type="submit">Sign in</button>
     </fieldset>
 
 </form>
-
-
+</div>
 
 </body>
 </html>
