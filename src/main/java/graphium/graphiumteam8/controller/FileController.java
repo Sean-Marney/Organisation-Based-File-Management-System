@@ -80,19 +80,19 @@ public class FileController {
         File file = fileDAO.findByFileName(fileName);
 
         if (setFileAccessForm.getFileAccessEveryone().equals("choiceEveryone")){
-            fileService.setFileAccessToEveryone();
+            model.addAttribute("everyone", fileService.setFileAccessToEveryone());
         } else if
         (setFileAccessForm.getFileAccessMyOrganisation().equals("choiceMyOrganisation")){
-            fileService.setFileAccessToMyOrganisation();
+            model.addAttribute("myOrganisation", fileService.setFileAccessToMyOrganisation());
         } else if
         (setFileAccessForm.getFileAccessOtherOrganisation().equals("choiceOtherOrganisation")){
-            fileService.setFileAccessToOtherOrganisation();
+            model.addAttribute("otherOrganisation", fileService.setFileAccessToOtherOrganisation());
         } else if
         (setFileAccessForm.getFileAccessSpecificUser().equals("choiceSpecificUser")){
-            fileService.setFileAccessToSpecificUser();
+            model.addAttribute("specificUser", fileService.setFileAccessToSpecificUser());
         } else if
         (setFileAccessForm.getFileAccessMyself().equals("choiceMyself")){
-            fileService.setFileAccessToMyself();
+            model.addAttribute("myself", fileService.setFileAccessToMyself());
         }
 
         return "file-access-results";

@@ -45,28 +45,23 @@ public class FileService{
     }
 
     public String setFileAccessToEveryone(){
-        String log = "setFileAccessToEveryone";
-        return log;
+        return "setFileAccessToEveryone";
     }
 
     public String setFileAccessToMyOrganisation(){
-        String log = "setFileAccessToMyOrganisation";
-        return log;
+        return "setFileAccessToMyOrganisation";
     }
 
     public String setFileAccessToOtherOrganisation(){
-        String log = "setFileAccessToOtherOrganisation";
-        return log;
+        return "setFileAccessToOtherOrganisation";
     }
 
     public String setFileAccessToSpecificUser(){
-        String log = "setFileAccessToSpecificUser";
-        return log;
+        return "setFileAccessToSpecificUser";
     }
 
     public String setFileAccessToMyself(){
-        String log = "setFileAccessToMyself";
-        return log;
+        return "setFileAccessToMyself";
     }
 
 }
