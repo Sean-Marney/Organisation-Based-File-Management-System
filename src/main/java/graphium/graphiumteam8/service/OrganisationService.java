@@ -28,7 +28,7 @@ public class OrganisationService {
         List<String> listOfOrganisationNames = new ArrayList<>();
 
         for(Organisation organisation : listOrganisations()){
-            listOfOrganisationNames.add(organisation.getOrgName());
+            listOfOrganisationNames.add(organisation.getOrganisationName());
         }
 
         return listOfOrganisationNames;

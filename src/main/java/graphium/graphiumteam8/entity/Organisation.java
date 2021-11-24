@@ -14,10 +14,10 @@ public class Organisation {
     private long id;
 
     @Column(name = "organisation_name")
-    private String orgName;
+    private String organisationName;
 
     @Column(name = "organisation_description")
-    private String orgDescription;
+    private String organisationDescription;
 
 
 }

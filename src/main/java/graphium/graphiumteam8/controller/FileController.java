@@ -39,7 +39,7 @@ public class FileController {
     }
 
     // Returns list of file names from database as its is needed in URL to download correlating file
-    @GetMapping("/files") // TODO "/files/{username}"
+    @GetMapping("/files")
     public String getFiles(Model model) {
 
         List<String> listOfFileNames = fileService.listFileNames();
