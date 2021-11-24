@@ -10,12 +10,12 @@
 <!-- Login form for the user to sign in to there account and access  -->
 
     <p th:if="${loginErrror}" class="error"></p>
-<!--<form name="login" class="text-center border border-light p-5" >-->
-    <form name="login" class="text-center border border-light p-5" th:action="@{/login}" method="post">
+<form name="login" class="text-center border border-light p-5" >
+<!--    <form name="login" class="text-center border border-light p-5" th:action="@{/login}" method="post">-->
     <fieldset>
         <legend class="h4 mb-4">Sign in</legend>
         <div th:if="${param.error}" class="alert alert-error">
-            <span th:text="#{login.error}"/>
+<!--            <span th:text="#{login.error}"/>-->
             Invalid username or password.
         </div>
 <!--        <label for="username">Username</label>-->

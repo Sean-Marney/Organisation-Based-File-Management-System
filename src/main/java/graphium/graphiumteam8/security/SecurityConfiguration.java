@@ -37,27 +37,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
-//                .antMatchers("/coach").hasRole("COACH")
-//                .and().formLogin();
-//    }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-//                .antMatchers("/organisation/**").hasRole("ORGANISATION")
-//                .antMatchers("/user/**").hasRole("USER")
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/organisation/**").hasRole("ORGANISATION")
+                .antMatchers("/user/**").hasRole("USER")
                 .and().formLogin()
                 .loginPage("/login")
                 .permitAll()
                 .defaultSuccessUrl("/login-success")
                 .failureUrl("/login?error=true");
-
-        http.logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/logout-success");
 
     }
 }

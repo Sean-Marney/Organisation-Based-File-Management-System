@@ -20,8 +20,11 @@ USE `graphium` ;
 CREATE TABLE IF NOT EXISTS `graphium`.`user` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NOT NULL,
+  `fname` VARCHAR(45) NOT NULL,
+  `lname` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `role` VARCHAR(45) NOT NULL,
   `password` VARCHAR(200) NULL DEFAULT NULL,
-  `organisation` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) )
 ENGINE = InnoDB
@@ -32,10 +35,33 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `graphium`.`organisation` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `organisation` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(200) NULL DEFAULT NULL,
+  `institution` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `organisation_UNIQUE` (`organisation` ASC) )
+  UNIQUE INDEX `institution_UNIQUE` (`institution` ASC) )
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8;
+-- -----------------------------------------------------
+-- Table `graphium`.`employee`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `graphium`.`access` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(45) NOT NULL,
+  `institution` VARCHAR(200) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_organisation_user_idx` (`user_id` ASC) ,
+  INDEX `fk_organisation_idx` (`organisation_id` ASC) ,
+  CONSTRAINT `fk_organisation_user`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `graphium`.`user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_organisation`
+    FOREIGN KEY (`organisation_id`)
+    REFERENCES `graphium`.`organisation` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+
 ENGINE = InnoDB
 AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8;
@@ -51,7 +77,6 @@ CREATE TABLE IF NOT EXISTS `graphium`.`admin` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8;
-
 
 DELIMITER ;
 SET SQL_MODE=@OLD_SQL_MODE;
