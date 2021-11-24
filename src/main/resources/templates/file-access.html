@@ -7,14 +7,14 @@
 </head>
 <body>
 
-<div>
+<div class="container text-center">
     <h2>Set file access</h2>
     <form th:action="@{/files/file-access/} + ${fileName}" th:object="${setFileAccessForm}" method="post">
-        <p>File access:<br>Everyone<input type="radio" th:field="*{fileAccessEveryone}" name="options" value="choiceEveryone"></p>
-        <p>File access:<br>My Organisation<input type="radio" th:field="*{fileAccessMyOrganisation}" name="options" value="choiceMyOrganisation"></p>
-        <p>File access:<br>Other Organisation<input type="radio" th:field="*{fileAccessOtherOrganisation}" name="options" value="choiceOtherOrganisation"></p>
-        <p>File access:<br>Specific User<input type="radio" th:field="*{fileAccessSpecificUser}" name="options" value="choiceSpecificUser"></p>
-        <p>File access:<br>Myself<input type="radio" th:field="*{fileAccessMyself}" name="options" value="choiceMyself"></p>
+        <p>File access:<br>Everyone <input type="radio" th:field="*{fileAccessEveryone}" value="choiceEveryone"></p>
+        <p>File access:<br>My Organisation <input type="radio" th:field="*{fileAccessMyOrganisation}" value="choiceMyOrganisation"></p>
+        <p>File access:<br>Other Organisation <input type="radio" th:field="*{fileAccessOtherOrganisation}" value="choiceOtherOrganisation"></p>
+        <p>File access:<br>Specific User <input type="radio" th:field="*{fileAccessSpecificUser}" value="choiceSpecificUser"></p>
+        <p>File access:<br>Myself <input type="radio" th:field="*{fileAccessMyself}" value="choiceMyself"></p>
         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" />
         </p>
     </form>

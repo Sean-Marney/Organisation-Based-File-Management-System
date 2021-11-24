@@ -10,7 +10,7 @@
 <!--Trying to make file system compact and making everything easily accessible so functions are close by-->
 
 <!--All files from database (viewable/downloadable)-->
-<div class="download">
+<div class="container text-center">
     <h2>Your files:</h2>
 
     <table class="table table-stripped">
@@ -31,6 +31,10 @@
         </tr>
         </tbody>
     </table>
+
+    <div class="container text-center">
+        <h5><a th:href="@{/files/upload}">Upload a file</a></h5>
+    </div>
 </div>
 
 <!--Form to search for files-->

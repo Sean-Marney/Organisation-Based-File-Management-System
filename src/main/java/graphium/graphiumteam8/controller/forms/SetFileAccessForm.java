@@ -2,13 +2,12 @@ package graphium.graphiumteam8.controller.forms;
 
 import lombok.Data;
 
-// Form class for sending a file to another user
+import javax.persistence.Column;
+
+// Form class for setting the access level of an uploaded file
 
 @Data
 public class SetFileAccessForm {
-
-    // Temp
-    private String username = "fakeUsername123";
 
     private String fileAccessEveryone;
 

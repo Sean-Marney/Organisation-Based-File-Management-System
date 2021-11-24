@@ -4,6 +4,8 @@ import graphium.graphiumteam8.controller.forms.SetFileAccessForm;
 import graphium.graphiumteam8.entity.File;
 import graphium.graphiumteam8.repository.FileDAO;
 import graphium.graphiumteam8.service.FileService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -25,6 +27,8 @@ import java.util.Objects;
 
 @Controller
 public class FileController {
+
+    Logger logger = LoggerFactory.getLogger(FileController.class);
 
     private final FileService fileService;
     private final FileDAO fileDAO;
@@ -73,29 +77,38 @@ public class FileController {
         return "file-access";
     }
 
+    // TODO Only the first if statement sets the variable - Maybe use list instead of radio btn
     @PostMapping("/files/file-access/{fileName}")
     public String fileAccessFormSubmit(@PathVariable String fileName, @ModelAttribute SetFileAccessForm setFileAccessForm, Model model){
         model.addAttribute("setFileAccessForm", setFileAccessForm);
 
-        File file = fileDAO.findByFileName(fileName);
+        if (setFileAccessForm.getFileAccessEveryone().equals("choiceEveryone")){ // Choices from radio button results
+            fileService.setFileAccessToEveryone(); // Set file access
+            logger.info("Called setFileAccess");
+            return "redirect:/files";
 
-        if (setFileAccessForm.getFileAccessEveryone().equals("choiceEveryone")){
-            model.addAttribute("everyone", fileService.setFileAccessToEveryone());
-        } else if
-        (setFileAccessForm.getFileAccessMyOrganisation().equals("choiceMyOrganisation")){
-            model.addAttribute("myOrganisation", fileService.setFileAccessToMyOrganisation());
-        } else if
-        (setFileAccessForm.getFileAccessOtherOrganisation().equals("choiceOtherOrganisation")){
-            model.addAttribute("otherOrganisation", fileService.setFileAccessToOtherOrganisation());
-        } else if
-        (setFileAccessForm.getFileAccessSpecificUser().equals("choiceSpecificUser")){
-            model.addAttribute("specificUser", fileService.setFileAccessToSpecificUser());
-        } else if
-        (setFileAccessForm.getFileAccessMyself().equals("choiceMyself")){
-            model.addAttribute("myself", fileService.setFileAccessToMyself());
+        } else if (setFileAccessForm.getFileAccessMyOrganisation().equals("choiceMyOrganisation")){
+            fileService.setFileAccessToMyOrganisation();
+            logger.info("Called setFileAccessToMyOrganisation");
+            return "redirect:/files";
+
+        } else if (setFileAccessForm.getFileAccessOtherOrganisation().equals("choiceOtherOrganisation")){
+            fileService.setFileAccessToOtherOrganisation();
+            logger.info("Called setFileAccessToOtherOrganisation");
+            return "redirect:/files";
+
+        } else if (setFileAccessForm.getFileAccessSpecificUser().equals("choiceSpecificUser")){
+            fileService.setFileAccessToSpecificUser();
+            logger.info("Called setFileAccessToSpecificUser");
+            return "redirect:/files";
+
+        } else if (setFileAccessForm.getFileAccessMyself().equals("choiceMyself")){
+            fileService.setFileAccessToMyself();
+            logger.info("Called setFileAccessToMyself");
+            return "redirect:/files";
         }
 
-        return "file-access-results";
+        return "redirect:/files";
     }
 
     // This endpoint allows the user to download/view a file from the database by its file name

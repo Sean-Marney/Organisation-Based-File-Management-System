@@ -43,23 +43,21 @@ public class FileService{
         return fileDAO.fileSearch(searchTerm);
     }
 
-    public String setFileAccessToEveryone(){
-        return "setFileAccessToEveryone";
+    // Logic for setting the file access \\
+
+    public void setFileAccessToEveryone(){
+
     }
 
-    public String setFileAccessToMyOrganisation(){
-        return "setFileAccessToMyOrganisation";
+    public void setFileAccessToMyOrganisation(){
     }
 
-    public String setFileAccessToOtherOrganisation(){
-        return "setFileAccessToOtherOrganisation";
+    public void setFileAccessToOtherOrganisation(){
     }
 
-    public String setFileAccessToSpecificUser(){
-        return "setFileAccessToSpecificUser";
+    public void setFileAccessToSpecificUser(){
     }
 
-    public String setFileAccessToMyself(){
-        return "setFileAccessToMyself";
+    public void setFileAccessToMyself(){
     }
 }
