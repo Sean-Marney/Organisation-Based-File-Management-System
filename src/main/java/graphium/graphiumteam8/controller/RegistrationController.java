@@ -20,13 +20,12 @@ public class RegistrationController {
 
     @GetMapping("/applicant-register")
     public String serveApplicant(Model model) {
-        AccountForm accountForm = new AccountForm();
-        model.addAttribute("accountForm", accountForm);
+        model.addAttribute("accountForm", new AccountForm());
         return "registration";
     }
 
 
-    @PostMapping("/registerion")
+    @PostMapping("/registration")
     public String createUser(Model model, @Valid @RequestParam("username") String username, String firstname, String lastname, String email, String password, String organisation) {
 //        UserCreationMessage creationMessage = userService.createUserApplicant(firstname, lastname, username, email, password, organisation);
 
