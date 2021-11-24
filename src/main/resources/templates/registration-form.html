@@ -8,15 +8,72 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="/static/js/confirm-password.js"></script>
-    <title>Registration </title>
+    <title>Account Registration </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
 </head>
 <body>
-<div>
-    <h1> Create a Graphium Account </h1>
+
+<div class="container text-center">
+    <h1>Create Graphium Account</h1>
+
+    <form th:action="@{/register-form}" method="post" th:object="${user}"
+                    style="max-width: 500px; margin: 0 auto;">
+        
+        <div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-4">First Name</label>
+                <div class="col-8">
+                    <input class="form-control" type="text"
+                           th:field="*{firstName}" required
+                            minlength="2" maxlength="50">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-4">Last Name</label>
+                <div class="col-8">
+                    <input class="form-control" type="text"
+                           th:field="*{lastName}" required
+                           minlength="2" maxlength="50">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-4">Username</label>
+                <div class="col-8">
+                    <input class="form-control" type="text"
+                           th:field="*{username}" required
+                           minlength="2" maxlength="25">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-4">Password</label>
+                <div class="col-8">
+                    <input class="form-control" type="password"
+                           th:field="*{password}" required
+                           minlength="5" maxlength="20">
+                </div>
+            </div>
+
+            <div>
+                <button class="btn btn-primary" type="submit">Create Account</button>
+            </div>
+
+        </div>
+        
+    </form>
+
+</div>
 
 
 
-    <!--/*@thymesVar id="accountForm" type="graphium"*/-->
+
+    <!--/*@thymesVar id="accountForm" type="graphium"
+    <div>
     <form id="register" class="border-light p-5 needs-validation" th:action="@{/applicant-register}"
           th:method="post" th:object="${accountForm}" novalidate>
         <label> First Name </label> <label>
@@ -42,7 +99,7 @@
         <label> Password </label> <label>
         <input title="Password must contain at least 6 characters, including UPPER/lowercase and numbers"
                type="text" class="form-control password" id="password" name="password"
-               th:feild="*{password}" onkeyup='check();'>
+               th:field="*{password}" onkeyup='check();'>
         </label>
     <br>
         <label> Confirm Password </label> <label>
@@ -57,6 +114,7 @@
         <button  name="submit" type="submit" class="button btn btn-primary">Submit</button>
     </form>
 </div>
+
 
 <script>
     // validation script = "https://www.w3schools.com/bootstrap4/tryit.asp?filename=trybs_form_validation_needs&stacked=h"
@@ -96,7 +154,7 @@
     }
 </script>
 <script>
-    // <!--  script below from = https://stackoverflow.com/questions/21727317/how-to-check-confirm-password-field-in-form-without-reloading-page-->
+    //   script below from = https://stackoverflow.com/questions/21727317/how-to-check-confirm-password-field-in-form-without-reloading-page
     var check = function() {
         if (document.getElementById('password').value ===
             document.getElementById('confirm_password').value) {
@@ -110,5 +168,6 @@
 
 </script>
 
+    */-->
 </body>
 </html>

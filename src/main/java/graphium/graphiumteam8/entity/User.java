@@ -13,15 +13,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false, length = 45)
-    private String fname;
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
 
-    @Column(nullable = false, length = 45)
-    private String lname;
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
 
-    @Column(nullable = false, length = 45)
+    @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(nullable = false, length = 64) // length 64 matches bcrypt
+    @Column(name = "password", nullable = false) // length 64 matches bcrypt
     private String password; // Encode in bcrypt
 }

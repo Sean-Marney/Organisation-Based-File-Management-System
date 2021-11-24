@@ -40,7 +40,7 @@ public class AccountForm {
     //Minimum eight characters, at least one letter and one number
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
     @Size(min = 2, max = 50, message = "Needs to be between 2-50 characters ")
-    private String Password;
+    private String password;
 
 //    @NotEmpty(message = "")
 //    @Size(message = "")
