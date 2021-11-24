@@ -1,6 +1,5 @@
 package graphium.graphiumteam8.service;
 
-import graphium.graphiumteam8.controller.forms.SetFileAccessForm;
 import graphium.graphiumteam8.entity.File;
 import graphium.graphiumteam8.repository.FileDAO;
 import org.springframework.stereotype.Service;
@@ -63,5 +62,4 @@ public class FileService{
     public String setFileAccessToMyself(){
         return "setFileAccessToMyself";
     }
-
 }
