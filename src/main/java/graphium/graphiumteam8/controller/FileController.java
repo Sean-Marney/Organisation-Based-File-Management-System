@@ -4,8 +4,6 @@ import graphium.graphiumteam8.controller.forms.SetFileAccessForm;
 import graphium.graphiumteam8.entity.File;
 import graphium.graphiumteam8.repository.FileDAO;
 import graphium.graphiumteam8.service.FileService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -27,8 +25,6 @@ import java.util.Objects;
 
 @Controller
 public class FileController {
-
-    Logger logger = LoggerFactory.getLogger(FileController.class);
 
     private final FileService fileService;
     private final FileDAO fileDAO;
@@ -99,33 +95,30 @@ public class FileController {
     public String fileAccessFormSubmit(@PathVariable String fileName, @ModelAttribute SetFileAccessForm setFileAccessForm, Model model){
         model.addAttribute("setFileAccessForm", setFileAccessForm);
 
-        if (setFileAccessForm.getFileAccessEveryone().equals("choiceEveryone")){ // Choices from radio button results
-            fileService.setFileAccessToEveryone(); // Set file access
-            logger.info("Called setFileAccess");
+        if (Objects.equals(setFileAccessForm.getFileAccessEveryone(), "choiceEveryone")){ // Choices from radio button results
+            fileService.setFileAccessToEveryone();
             return "redirect:/files";
 
-        } else if (setFileAccessForm.getFileAccessMyOrganisation().equals("choiceMyOrganisation")){
+        } else if (Objects.equals(setFileAccessForm.getFileAccessMyOrganisation(), "choiceMyOrganisation")){
             fileService.setFileAccessToMyOrganisation();
-            logger.info("Called setFileAccessToMyOrganisation");
             return "redirect:/files";
 
-        } else if (setFileAccessForm.getFileAccessOtherOrganisation().equals("choiceOtherOrganisation")){
+        } else if (Objects.equals(setFileAccessForm.getFileAccessOtherOrganisation(), "choiceOtherOrganisation")){
             fileService.setFileAccessToOtherOrganisation();
-            logger.info("Called setFileAccessToOtherOrganisation");
             return "redirect:/files";
 
-        } else if (setFileAccessForm.getFileAccessSpecificUser().equals("choiceSpecificUser")){
-            fileService.setFileAccessToSpecificUser();
-            logger.info("Called setFileAccessToSpecificUser");
-            return "redirect:/files";
-
-        } else if (setFileAccessForm.getFileAccessMyself().equals("choiceMyself")){
+        } else if (Objects.equals(setFileAccessForm.getFileAccessMyself(), "choiceMyself")){
             fileService.setFileAccessToMyself();
-            logger.info("Called setFileAccessToMyself");
             return "redirect:/files";
-        }
 
-        return "redirect:/files";
+        } else if (Objects.equals(setFileAccessForm.getFileAccessSpecificUser(), "choiceSpecificUser")) {
+            fileService.setFileAccessToSpecificUser();
+            return "redirect:/files";
+
+        } else {
+
+            return "redirect:/";
+        }
     }
 
     // This endpoint allows the user to download/view a file from the database by its file name
@@ -158,8 +151,6 @@ public class FileController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;fileName=" + file.getFileName())
                 .body(file.getFileObject());
     }
-
-    // File share
 
     // TODO Currently not working properly
     @GetMapping("/files/search")

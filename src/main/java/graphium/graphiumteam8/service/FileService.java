@@ -1,7 +1,10 @@
 package graphium.graphiumteam8.service;
 
+import graphium.graphiumteam8.controller.FileController;
 import graphium.graphiumteam8.entity.File;
 import graphium.graphiumteam8.repository.FileDAO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,6 +14,8 @@ import java.util.List;
 
 @Service
 public class FileService{
+
+    Logger logger = LoggerFactory.getLogger(FileService.class);
 
     private File file;
 
@@ -46,18 +51,23 @@ public class FileService{
     // Logic for setting the file access \\
 
     public void setFileAccessToEveryone(){
-
+        logger.info("Called setFileAccessEveryone");
     }
 
     public void setFileAccessToMyOrganisation(){
+        logger.info("Called setFileAccessToMyOrganisation");
     }
 
     public void setFileAccessToOtherOrganisation(){
-    }
-
-    public void setFileAccessToSpecificUser(){
+        logger.info("Called setFileAccessToOtherOrganisation");
     }
 
     public void setFileAccessToMyself(){
+        logger.info("Called setFileAccessToMyself");
     }
+
+    public void setFileAccessToSpecificUser(){
+        logger.info("Called setFileAccessToSpecificUser");
+    }
+
 }

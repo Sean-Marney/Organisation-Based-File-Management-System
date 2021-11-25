@@ -11,6 +11,7 @@ public class Organisation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "organisation_id")
     private long id;
 
     @Column(name = "organisation_name")

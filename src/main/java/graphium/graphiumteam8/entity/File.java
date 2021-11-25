@@ -13,6 +13,7 @@ public class File {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "file_id")
     private long id;
 
     @Column(name = "file_name")
