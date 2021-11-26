@@ -37,4 +37,36 @@ public class RegistrationController {
 
         return "register-form-result";
     }
+
+
+
+
+
+
+
+
+
+
+    
+    /*
+    @GetMapping({"/registration"})
+    public String getRegistration(Model model) {
+        return "registration";
+    }
+
+    @GetMapping("/applicant-register")
+    public String serveApplicant(Model model) {
+        model.addAttribute("accountForm", new AccountForm());
+        return "registration";
+    }
+
+
+    @PostMapping("/registration")
+    public String createUser(Model model, @Valid @RequestParam("username") String username, String firstname, String lastname, String email, String password, String organisation) {
+//        UserCreationMessage creationMessage = userService.createUserApplicant(firstname, lastname, username, email, password, organisation);
+
+        return "login";
+    }
+
+     */
 }
