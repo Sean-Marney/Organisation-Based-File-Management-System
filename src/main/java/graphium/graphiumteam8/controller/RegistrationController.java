@@ -37,13 +37,4 @@ public class RegistrationController {
 
         return "register-form-result";
     }
-
-    @GetMapping("/users")
-    public String getUsers(Model model){
-
-        List<String> listOfUsernames = userService.listUsernames();
-        model.addAttribute("listOfUsernames", listOfUsernames);
-
-        return "users";
-    }
 }

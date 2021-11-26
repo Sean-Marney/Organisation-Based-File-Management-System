@@ -22,4 +22,7 @@ public class File {
     @Column(name = "file_object")
     @Lob // Allows file object storage in table
     private byte[] fileObject;
+
+    // Give the file an owner (get name when downloading)
+    private String fileOwner;
 }
