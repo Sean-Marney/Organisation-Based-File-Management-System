@@ -4,40 +4,15 @@
     <meta charset="UTF-8">
     <title>Files</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css" type="text/css">
+    <div th:replace="fragments/header :: header"/>
 </head>
 <body>
 
-<!--Form to upload files to database-->
-    <div class="upload">
-        <h2>File Upload</h2>
-
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            Upload File:
-            <input type="file" name="file">
-            <input type="submit" value="Upload">
-        </form>
-
-        <h6 th:text="${uploadMessage}" style="color: green"></h6>
-
-    </div>
-
-<!--Form to search for files-->
-<div class="search">
-    <h2>File Search</h2>
-
-    <form th:action="@{/files/search}" method="get" enctype="multipart/form-data">
-        <label>
-            <input type="search" name="searchTerm" size="30" placeholder="Search for a file" required
-                   th:value="${searchTerm}">
-        </label>
-        <input type="submit" value="Search">
-    </form>
-</div>
+<!--Trying to make file system compact and making everything easily accessible so functions are close by-->
 
 <!--All files from database (viewable/downloadable)-->
-<div class="download">
-    <h2>View files</h2>
+<div class="container text-center">
+    <h1>Your files:</h1>
 
     <table class="table table-stripped">
         <thead>
@@ -52,12 +27,32 @@
             <td>
                 <a class="mr-3" th:href="@{/files/view/} + ${file}">View</a>
                 <a class="mr-3" th:href="@{/files/download/} + ${file}">Download</a>
-                <a th:href="@{/files/delete/} + ${file}">Delete</a>
+                <a th:href="@{/files/file-access/} + ${file}">Set File Access</a>
             </td>
         </tr>
         </tbody>
     </table>
+
+    <div class="container text-center">
+        <h5><a th:href="@{/files/upload}">Upload a file</a></h5>
+    </div>
 </div>
 
+<!--Form to search for files-->
+<!--
+<div class="search">
+    <h2>File Search</h2>
+
+    <form th:action="@{/files/search}" method="get" enctype="multipart/form-data">
+        <label>
+            <input type="search" name="searchTerm" size="30" placeholder="Search for a file" required
+                   th:value="${searchTerm}">
+        </label>
+        <input type="submit" value="Search">
+    </form>
+</div>
+<--.-->
+
+<div th:replace="fragments/footer :: bootstrap-js"></div>
 </body>
 </html>

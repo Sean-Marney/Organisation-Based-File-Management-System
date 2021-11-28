@@ -38,7 +38,7 @@ public class FileControllerTests {
 
     @Test
     @DisplayName("File download test")
-    void shouldDownloadAFile(){
+    void shouldDownloadAFile() throws Exception {
 
         MockMultipartFile mockMultipartFile = new MockMultipartFile(
                 "file",
@@ -47,6 +47,6 @@ public class FileControllerTests {
                 "Content"
                 .getBytes()
         );
-        this.mockMvc.perform(MockMvcRequestBuilders.multipart("/download"))
+        this.mockMvc.perform(MockMvcRequestBuilders.multipart("/download"));
     }
 }
