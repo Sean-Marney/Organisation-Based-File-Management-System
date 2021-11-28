@@ -1,5 +1,6 @@
 package graphium.graphiumteam8.controller;
 
+import graphium.graphiumteam8.entity.Organisation;
 import graphium.graphiumteam8.entity.User;
 import graphium.graphiumteam8.repository.UserRepository;
 import graphium.graphiumteam8.service.UserService;
@@ -7,8 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.List;
 
 @Controller
 public class RegistrationController {
@@ -26,6 +25,7 @@ public class RegistrationController {
 
         // Create new user object to be sent to form
         model.addAttribute("user", new User());
+        model.addAttribute("organisation", new Organisation());
 
         return "registration-form";
     }

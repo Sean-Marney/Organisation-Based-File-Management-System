@@ -10,6 +10,8 @@ import java.util.List;
 @Data
 public class User {
 
+    // User and Organisation merged
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -22,8 +24,12 @@ public class User {
     private String lastName;
 
     @Column(name = "username", nullable = false)
-    private String username;
+    private String username = "testUsername";
 
     @Column(name = "password", nullable = false) // length 64 matches bcrypt
     private String password; // Encode in bcrypt
+
+    @Column(name = "role", nullable = false)
+    private String role;
+
 }

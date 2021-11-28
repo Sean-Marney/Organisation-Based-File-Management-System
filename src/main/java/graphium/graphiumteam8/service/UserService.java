@@ -46,6 +46,5 @@ public class UserService {
             username = principal.toString();
         }
         return username;
-
     }
 }

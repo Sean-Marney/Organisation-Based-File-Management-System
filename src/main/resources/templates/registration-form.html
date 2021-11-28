@@ -20,6 +20,16 @@
 
     <form th:action="@{/register-form}" method="post" th:object="${user}"
                     style="max-width: 500px; margin: 0 auto;">
+
+        <div>
+            <div class="form-group row">
+                <label class="col-form-label col-4">Organisation Name</label>
+                <div class="col-8">
+                    <input class="form-control" type="search"
+                           th:field="*{organisationName}" required
+                           minlength="2" maxlength="50">
+                </div>
+            </div>
         
         <div>
             <div class="form-group row">
