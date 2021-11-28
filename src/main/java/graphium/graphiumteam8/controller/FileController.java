@@ -1,5 +1,6 @@
 package graphium.graphiumteam8.controller;
 
+import graphium.graphiumteam8.controller.forms.SetFileAccessForm;
 import graphium.graphiumteam8.entity.File;
 import graphium.graphiumteam8.repository.FileDAO;
 import graphium.graphiumteam8.service.FileService;
@@ -20,6 +21,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
+// Controller for functionality of the file system
+
 @Controller
 public class FileController {
 
@@ -31,6 +34,22 @@ public class FileController {
         this.fileService = fileService;
     }
 
+    // Returns list of file names from database as its is needed in URL to download correlating file
+    @GetMapping("/files")
+    public String getFiles(Model model) {
+
+        List<String> listOfFileNames = fileService.listFileNames();
+        model.addAttribute("listOfFileNames", listOfFileNames);
+
+        return "files";
+    }
+
+    // Returns the file upload form
+    @GetMapping("/files/upload")
+    public String getUploadForm(){
+
+        return "file-upload";
+    }
 
     // This endpoint allows user to select their own file and upload it to the database
     @PostMapping("/upload")
@@ -39,6 +58,7 @@ public class FileController {
         // Getting file name
         String name = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
         System.out.println("TEST: + " + name);
+        System.out.println("Log: fileName is " + name);
 
         // Getting file type
         String fileType = file.getContentType();
@@ -62,14 +82,44 @@ public class FileController {
         return "redirect:/files";
     }
 
-    // Returns list of file names from database as its is needed in URL to download correlating file
-    @GetMapping("/files")
-    public String getFiles(Model model) {
+    // Returns file access form
+    @GetMapping("/files/file-access/{fileName}")
+    public String fileAccessForm(@PathVariable String fileName, Model model){
 
-        List<String> listOfFileNames = fileService.listFileNames();
-        model.addAttribute("listOfFileNames", listOfFileNames);
+        model.addAttribute("setFileAccessForm", new SetFileAccessForm());
 
-        return "files";
+        return "file-access";
+    }
+
+    // TODO Only the first if statement sets the variable - Maybe use list instead of radio btn
+    @PostMapping("/files/file-access/{fileName}")
+    public String fileAccessFormSubmit(@PathVariable String fileName, @ModelAttribute SetFileAccessForm setFileAccessForm, Model model){
+        model.addAttribute("setFileAccessForm", setFileAccessForm);
+
+        if (Objects.equals(setFileAccessForm.getFileAccessEveryone(), "choiceEveryone")){ // Choices from radio button results
+            fileService.setFileAccessToEveryone();
+            return "redirect:/files";
+
+        } else if (Objects.equals(setFileAccessForm.getFileAccessMyOrganisation(), "choiceMyOrganisation")){
+            fileService.setFileAccessToMyOrganisation();
+            return "redirect:/files";
+
+        } else if (Objects.equals(setFileAccessForm.getFileAccessOtherOrganisation(), "choiceOtherOrganisation")){
+            fileService.setFileAccessToOtherOrganisation();
+            return "redirect:/files";
+
+        } else if (Objects.equals(setFileAccessForm.getFileAccessMyself(), "choiceMyself")){
+            fileService.setFileAccessToMyself();
+            return "redirect:/files";
+
+        } else if (Objects.equals(setFileAccessForm.getFileAccessSpecificUser(), "choiceSpecificUser")) {
+            fileService.setFileAccessToSpecificUser();
+            return "redirect:/files";
+
+        } else {
+
+            return "redirect:/";
+        }
     }
 
     // This endpoint allows the user to download/view a file from the database by its file name

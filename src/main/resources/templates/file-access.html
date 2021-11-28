@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Send files</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container text-center">
+    <h2>Set file access</h2>
+    <form th:action="@{/files/file-access/} + ${fileName}" th:object="${setFileAccessForm}" method="post">
+        <p><b>File access:</b><br>Everyone <input type="radio" th:field="*{fileAccessEveryone}" value="choiceEveryone"></p>
+        <p><b>File access:</b><br>My Organisation <input type="radio" th:field="*{fileAccessMyOrganisation}" value="choiceMyOrganisation"></p>
+        <p><b>File access:</b><br>Other Organisation <input type="radio" th:field="*{fileAccessOtherOrganisation}" value="choiceOtherOrganisation"></p>
+        <p><b>File access:</b><br>Myself <input type="radio" th:field="*{fileAccessMyself}" value="choiceMyself"></p>
+        <p><b>File access:</b><br>Specific User<br> <input type="search" th:field="*{fileAccessSpecificUser}" value="choiceSpecificUser"></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset"></p>
+    </form>
+</div>
+
+</body>
+</html>

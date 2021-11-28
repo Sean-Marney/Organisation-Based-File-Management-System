@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Organisations</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container text-center">
+
+    <table class="table table-stripped">
+        <thead>
+        <tr>
+            <th scope="col" class="h2"><b>Organisations</b></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="organisation : ${listOfOrganisationNames}">
+            <td th:text="${organisation}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="container text-center">
+        <h5><a th:href="@{organisations/create}">Add new organisation</a></h5>
+    </div>
+
+</div>
+
+</body>
+</html>
