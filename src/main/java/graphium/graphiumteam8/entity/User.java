@@ -3,7 +3,6 @@ package graphium.graphiumteam8.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -24,12 +23,12 @@ public class User {
     private String lastName;
 
     @Column(name = "username", nullable = false)
-    private String username = "testUsername";
+    private String username;
 
     @Column(name = "password", nullable = false) // length 64 matches bcrypt
     private String password; // Encode in bcrypt
 
-    @Column(name = "role", nullable = false)
-    private String role;
+    //@Column(name = "role", nullable = false)
+    //private String role;
 
 }
