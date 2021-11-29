@@ -25,7 +25,7 @@ public class RegistrationController {
 
         // Create new user object to be sent to form
         model.addAttribute("user", new User());
-        model.addAttribute("organisation", new Organisation());
+        //model.addAttribute("organisation", new Organisation());
 
         return "registration-form";
     }
