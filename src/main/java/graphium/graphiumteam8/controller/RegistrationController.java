@@ -1,16 +1,11 @@
 package graphium.graphiumteam8.controller;
 
-import graphium.graphiumteam8.controller.Admin.Form.AccountForm;
 import graphium.graphiumteam8.entity.User;
 import graphium.graphiumteam8.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.validation.Valid;
 
 @Controller
 public class RegistrationController {
