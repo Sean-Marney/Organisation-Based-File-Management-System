@@ -14,8 +14,8 @@ public class LoginController {
     }
 
 
-    @GetMapping("/logout-success")
-    public String logoutSuccess(HttpServletRequest request) {
+    @GetMapping("/login-success")
+    public String loginSuccess(HttpServletRequest request) {
         if (request.isUserInRole("ROLE_ADMIN")) {
             return "redirect:/admin";
         } else if (request.isUserInRole("ROLE_ORGANISATION")) {

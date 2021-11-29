@@ -1,4 +1,3 @@
-/*
 package graphium.graphiumteam8.security;
 
 
@@ -53,4 +52,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 }
 
- */
+
