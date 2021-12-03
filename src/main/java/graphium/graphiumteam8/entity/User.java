@@ -12,8 +12,9 @@ import java.util.Set;
 public class User {
 
     @Id
+    @Column(name = "user_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int user_id;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -37,12 +38,13 @@ public class User {
     @Column(name = "role")
     private String role;
 
-    public int getId() {
-        return id;
+
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public String getFirstName() {

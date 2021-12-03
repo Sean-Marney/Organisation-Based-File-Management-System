@@ -7,6 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class RegistrationController {
 
@@ -22,6 +25,8 @@ public class RegistrationController {
         // Create new user object to be sent to form
         model.addAttribute("user", new User());
 
+//        model.addAttribute("organisationList", organisationList);
+
         return "registration-form";
     }
 
@@ -33,6 +38,15 @@ public class RegistrationController {
         return "register-form-result";
     }
 
+//    //dropdown list
+//    static List<String> organisationList = null;
+//    static {
+//        organisationList = new ArrayList<>();
+//        organisationList.add("Organisation 1");
+//        organisationList.add("Organisation 2");
+//        organisationList.add("Organisation 3");
+//        organisationList.add("Organisation 4");
+//    }
 
 
 
