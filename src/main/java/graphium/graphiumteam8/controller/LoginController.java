@@ -27,15 +27,15 @@ public class LoginController {
         }
     }
 
-    @GetMapping("/organisation")
-    public String organisation() {
-        return "organisation";
-    }
-
-    @GetMapping("/user")
-    public String user() {
-        return "user";
-    }
+//    @GetMapping("/organisation")
+//    public String organisation() {
+//        return "organisation";
+//    }
+//
+//    @GetMapping("/user")
+//    public String user() {
+//        return "user";
+//    }
 
 //    @GetMapping("/register")
 //    public String register() {
