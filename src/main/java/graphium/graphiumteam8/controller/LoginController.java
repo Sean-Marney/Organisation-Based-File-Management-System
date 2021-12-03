@@ -37,10 +37,10 @@ public class LoginController {
         return "user";
     }
 
-    @GetMapping("/register")
-    public String register() {
-        return "register";
-    }
+//    @GetMapping("/register")
+//    public String register() {
+//        return "register";
+//    }
 
 }
 
