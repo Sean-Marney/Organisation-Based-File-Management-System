@@ -16,7 +16,7 @@ public class AppUserDetails implements UserDetails {
 
     public AppUserDetails(User user) {
         this.username = user.getUsername();
-//        this.password = user.getPassword();
+        this.password = user.getPassword();
         this.enabled = user.getEnabled();
         this.authorities = Arrays.asList(new SimpleGrantedAuthority(user.getRole()));
 //        this.authorities = user.getRoles();
@@ -24,8 +24,8 @@ public class AppUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-//        return password;
-        return "pass";
+        return password;
+//        return "pass";
     }
 
     @Override

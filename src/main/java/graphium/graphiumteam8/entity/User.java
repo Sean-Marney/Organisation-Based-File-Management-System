@@ -1,9 +1,11 @@
 package graphium.graphiumteam8.entity;
 
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -14,7 +16,7 @@ public class User {
     @Id
     @Column(name = "user_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int user_id;
+    private Integer user_id;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -102,4 +104,7 @@ public class User {
         this.enabled = enabled;
 
     }
+
+//    public List<GrantedAuthority> getRoles() {
+//    }
 }

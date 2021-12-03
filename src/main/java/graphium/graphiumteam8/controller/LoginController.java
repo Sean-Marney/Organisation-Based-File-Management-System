@@ -26,6 +26,22 @@ public class LoginController {
             return "redirect:/error";
         }
     }
+
+    @GetMapping("/organisation")
+    public String organisation() {
+        return "organisation";
+    }
+
+    @GetMapping("/user")
+    public String user() {
+        return "user";
+    }
+
+    @GetMapping("/register")
+    public String register() {
+        return "register";
+    }
+
 }
 
 
