@@ -1,4 +1,4 @@
-package graphium.graphiumteam8.security;
+package graphium.graphiumteam8.controller.RoleAuth;
 
 //import graphium.graphiumteam8.entity.Role;
 import graphium.graphiumteam8.entity.User;
