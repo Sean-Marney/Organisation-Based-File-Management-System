@@ -26,4 +26,5 @@ public class GetUserDetailsService implements org.springframework.security.core.
 
         return user.map(AppUserDetails::new).get();
     }
+
 }
