@@ -1,6 +1,8 @@
 package graphium.graphiumteam8.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -9,12 +11,14 @@ import javax.persistence.*;
 @Entity
 @Table(name = "files")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class File {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "file_id")
-    private long id;
+    private int id;
 
     @Column(name = "file_name")
     private String fileName;
@@ -23,6 +27,9 @@ public class File {
     @Lob // Allows file object storage in table
     private byte[] fileObject;
 
-    // Give the file an owner (get name when downloading)
-    private String fileOwner;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+
 }

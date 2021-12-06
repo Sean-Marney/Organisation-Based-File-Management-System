@@ -20,7 +20,6 @@ public class UserController {
 
         List<String> listOfUsernames = userService.listUsernames();
         model.addAttribute("listOfUsernames", listOfUsernames);
-        model.addAttribute("currentUser", userService.getCurrentUsername());
 
         return "users";
     }

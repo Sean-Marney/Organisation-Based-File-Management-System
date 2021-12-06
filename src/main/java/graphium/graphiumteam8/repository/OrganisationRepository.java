@@ -7,7 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface OrganisationDAO extends JpaRepository<Organisation, Long> {
+public interface OrganisationRepository extends JpaRepository<Organisation, Long> {
 
     List<Organisation> findAll();
+
+
 }

@@ -1,7 +1,7 @@
 package graphium.graphiumteam8.controller;
 
 import graphium.graphiumteam8.entity.Organisation;
-import graphium.graphiumteam8.repository.OrganisationDAO;
+import graphium.graphiumteam8.repository.OrganisationRepository;
 import graphium.graphiumteam8.service.OrganisationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,11 +14,11 @@ import java.util.List;
 public class OrganisationController {
 
     private final OrganisationService organisationService;
-    private final OrganisationDAO organisationDAO;
+    private final OrganisationRepository organisationRepository;
 
-    public OrganisationController(OrganisationService organisationService, OrganisationDAO organisationDAO) {
+    public OrganisationController(OrganisationService organisationService, OrganisationRepository organisationRepository) {
         this.organisationService = organisationService;
-        this.organisationDAO = organisationDAO;
+        this.organisationRepository = organisationRepository;
     }
 
     @GetMapping("/organisations")
@@ -42,7 +42,8 @@ public class OrganisationController {
     @PostMapping("/organisations/create-form")
     public String createOrganisationForm(Organisation organisation){
 
-        organisationDAO.save(organisation);
+        // TODO This is wrong - talk to service not directly to repo
+        organisationRepository.save(organisation);
 
         return "redirect:/organisations";
     }

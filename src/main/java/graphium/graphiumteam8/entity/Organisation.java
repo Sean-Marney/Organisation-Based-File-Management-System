@@ -3,6 +3,8 @@ package graphium.graphiumteam8.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "organisations")
@@ -16,9 +18,4 @@ public class Organisation {
 
     @Column(name = "organisation_name")
     private String organisationName;
-
-    @Column(name = "organisation_description")
-    private String organisationDescription;
-
-
 }
