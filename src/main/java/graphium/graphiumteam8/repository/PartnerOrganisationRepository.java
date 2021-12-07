@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PartnerOrganisationRepository extends JpaRepository<PartnerOrganisation, Long> {
+public interface PartnerOrganisationRepository extends JpaRepository<PartnerOrganisation, Integer> {
 
     List<PartnerOrganisation> findAll();
 

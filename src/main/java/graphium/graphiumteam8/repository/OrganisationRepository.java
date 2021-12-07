@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface OrganisationRepository extends JpaRepository<Organisation, Long> {
+public interface OrganisationRepository extends JpaRepository<Organisation, Integer> {
 
     List<Organisation> findAll();
 

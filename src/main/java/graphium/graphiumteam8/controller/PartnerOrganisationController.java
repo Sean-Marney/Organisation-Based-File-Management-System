@@ -13,7 +13,7 @@ import java.util.List;
 @Controller
 public class PartnerOrganisationController {
 
-    private PartnerOrganisationService partnerOrganisationService;
+    private final PartnerOrganisationService partnerOrganisationService;
 
     public PartnerOrganisationController(PartnerOrganisationService partnerOrganisationService) {
         this.partnerOrganisationService = partnerOrganisationService;
