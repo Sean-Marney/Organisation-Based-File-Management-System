@@ -1,10 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>add user</title>
+    <title>Create organisation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <div th:replace="fragments/header :: header"/>
 </head>
 <body>
 
+<div class="container text-center">
+    <h1>Add User</h1>
+
+    <form th:action="@{/management/add-form}" method="post" th:object="${management}"
+          style="max-width: 500px; margin: 0 auto;">
+
+        <div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-4">First Name</label>
+                <div class="col-8">
+                    <input class="form-control" type="text"
+                           th:field="*{firstName}" required
+                           minlength="2" maxlength="20">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-4">Last Name</label>
+                <div class="col-8">
+                    <input class="form-control" type="text"
+                           th:field="*{lastName}" required
+                           minlength="2" maxlength="20">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-4">Username</label>
+                <div class="col-8">
+                    <input class="form-control" type="text"
+                           th:field="*{username}" required
+                           minlength="2" maxlength="20">
+                </div>
+            </div>
+
+            <div>
+                <div class="form-group row">
+                    <label class="col-form-label col-4">Password</label>
+                    <div class="col-8">
+                        <input class="form-control" type="text"
+                               th:field="*{password}" required
+                               minlength="3" maxlength="100">
+                    </div>
+                </div>
+
+                <div>
+                    <button class="btn btn-primary" type="submit">Create User</button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+<div th:replace="fragments/footer :: bootstrap-js"></div>
 </body>
 </html>
