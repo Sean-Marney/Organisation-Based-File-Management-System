@@ -10,10 +10,9 @@
 <div class="container text-center">
     <h2>Set file access</h2>
     <form th:action="@{/files/file-access/} + ${fileName}" th:object="${setFileAccessForm}" method="post">
-        <p><b>File access:</b><br>Everyone <input type="radio" th:field="*{fileAccessEveryone}" value="choiceEveryone"></p>
+        <p><b>File access:</b><br>Public <input type="radio" th:field="*{fileAccessPublic}" value="choicePublic"></p>
         <p><b>File access:</b><br>My Organisation <input type="radio" th:field="*{fileAccessMyOrganisation}" value="choiceMyOrganisation"></p>
-        <p><b>File access:</b><br>Other Organisation <input type="radio" th:field="*{fileAccessOtherOrganisation}" value="choiceOtherOrganisation"></p>
-        <p><b>File access:</b><br>Myself <input type="radio" th:field="*{fileAccessMyself}" value="choiceMyself"></p>
+        <p><b>File access:</b><br>Partner Organisation <input type="radio" th:field="*{fileAccessPartnerOrganisation}" value="choicePartnerOrganisation"></p>
         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset"></p>
     </form>
 </div>

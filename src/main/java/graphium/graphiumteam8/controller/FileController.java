@@ -1,19 +1,14 @@
 package graphium.graphiumteam8.controller;
 
 import graphium.graphiumteam8.controller.forms.SetFileAccessForm;
-import graphium.graphiumteam8.entity.File;
-import graphium.graphiumteam8.repository.FileRepository;
 import graphium.graphiumteam8.service.FileService;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -27,6 +22,7 @@ public class FileController {
 
     private final FileService fileService;
 
+    @Autowired
     public FileController(FileService fileService) {
         this.fileService = fileService;
     }
@@ -35,8 +31,19 @@ public class FileController {
     @GetMapping("/files")
     public String getFiles(Model model) {
 
+        // User's files
         List<String> listOfFileNames = fileService.listFileNames();
         model.addAttribute("listOfFileNames", listOfFileNames);
+
+        // User's public files ( TODO: find a way to let others see the files depending on access - secure methods so that only those roles can access it)
+        List<String> publicFiles = fileService.publicFiles;
+        model.addAttribute("listOfPublicFiles", publicFiles);
+
+        List<String> organisationFiles = fileService.organisationFiles;
+        model.addAttribute("listOfOrganisationFiles", organisationFiles);
+
+        List<String> partnerOrganisationFiles = fileService.partnerOrganisationFiles;
+        model.addAttribute("listOfPartnerOrganisationFiles", partnerOrganisationFiles);
 
         return "files";
     }
@@ -68,21 +75,19 @@ public class FileController {
     public String fileAccessFormSubmit(@PathVariable String fileName, @ModelAttribute SetFileAccessForm setFileAccessForm, Model model){
         model.addAttribute("setFileAccessForm", setFileAccessForm);
 
-        // Choices from radio button results
-        if (Objects.equals(setFileAccessForm.getFileAccessEveryone(), "choiceEveryone")){
-            fileService.setFileAccessToEveryone();
+            // Adds files to public file table
+        if (Objects.equals(setFileAccessForm.getFileAccessPublic(), "choicePublic")){
+            fileService.setFileAccessToPublic(fileName);
             return "redirect:/files";
 
+            // Adds files to organisation file table
         } else if (Objects.equals(setFileAccessForm.getFileAccessMyOrganisation(), "choiceMyOrganisation")){
-            fileService.setFileAccessToMyOrganisation();
+            fileService.setFileAccessToMyOrganisation(fileName);
             return "redirect:/files";
 
-        } else if (Objects.equals(setFileAccessForm.getFileAccessOtherOrganisation(), "choiceOtherOrganisation")){
-            fileService.setFileAccessToOtherOrganisation();
-            return "redirect:/files";
-
-        } else if (Objects.equals(setFileAccessForm.getFileAccessMyself(), "choiceMyself")){
-            fileService.setFileAccessToMyself();
+            // Adds files to partner organisation file table
+        } else if (Objects.equals(setFileAccessForm.getFileAccessPartnerOrganisation(), "choicePartnerOrganisation")){
+            fileService.setFileAccessToPartnerOrganisation(fileName);
             return "redirect:/files";
 
         } else {

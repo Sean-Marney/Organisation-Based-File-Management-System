@@ -1,10 +1,7 @@
 package graphium.graphiumteam8.service;
 
 import graphium.graphiumteam8.entity.File;
-import graphium.graphiumteam8.entity.User;
 import graphium.graphiumteam8.repository.FileRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -17,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.print.attribute.standard.Media;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,7 +24,11 @@ import java.util.Objects;
 
 @Service
 public class FileService{
-    Logger logger = LoggerFactory.getLogger(FileService.class);
+
+    // TODO: Encapsulation issue
+    public List<String> publicFiles = new ArrayList<>();
+    public List<String> organisationFiles = new ArrayList<>();
+    public List<String> partnerOrganisationFiles = new ArrayList<>();
 
     private final FileRepository fileRepository;
 
@@ -105,19 +105,18 @@ public class FileService{
 
     // Logic for setting the file access \\
 
-    public void setFileAccessToEveryone(){
-        logger.info("Called setFileAccessEveryone");
+    public void setFileAccessToPublic(String fileName){
+
+        publicFiles.add(fileName);
     }
 
-    public void setFileAccessToMyOrganisation(){
-        logger.info("Called setFileAccessToMyOrganisation");
+    public void setFileAccessToMyOrganisation(String fileName){
+
+        organisationFiles.add(fileName);
     }
 
-    public void setFileAccessToOtherOrganisation(){
-        logger.info("Called setFileAccessToOtherOrganisation");
-    }
+    public void setFileAccessToPartnerOrganisation(String fileName){
 
-    public void setFileAccessToMyself(){
-        logger.info("Called setFileAccessToMyself");
+        partnerOrganisationFiles.add(fileName);
     }
 }
