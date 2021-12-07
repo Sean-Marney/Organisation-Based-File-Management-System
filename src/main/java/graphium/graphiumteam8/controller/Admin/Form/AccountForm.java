@@ -6,10 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Data
 @AllArgsConstructor
@@ -17,22 +14,27 @@ import javax.validation.constraints.Size;
 @Entity
 public class AccountForm {
 
+    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     @NotEmpty(message = "The first name of the user must be between 2 and 60 characters.")
     @Size(min = 2, max = 60, message = "The first name of the user must be between 2 and 60 characters.")
     private String firstName;
 
+    @NotNull
     @NotEmpty(message = "The last name of the user must be between 2 and 60 characters.")
     @Size(min = 2, max = 60, message = "The last name of the user must be between 2 and 60 characters.")
     private String lastName;
 
+    @NotNull
     @NotEmpty(message = "The username of the user must be between 2 and 60 characters.")
     @Size(min = 2, max = 60, message = "The username of the user must be between 2 and 60 characters.")
     private String username;
 
+    @NotNull
     @NotEmpty(message = "Email invalid")
     @Email
     private String email;
