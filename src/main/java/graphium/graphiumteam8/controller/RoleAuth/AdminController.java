@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-// Adam - needs request mapping for all types of admins (so maybe "/management/" before anything else)
+
 public class AdminController {
 
     @Autowired
@@ -24,7 +24,7 @@ public class AdminController {
     public String getUsers(Model model) {
         List<User> allUsers = users.findAll();
         model.addAttribute(allUsers);
-        return "management"; // Needs to return all users
+        return "management";
     }
 
 /*
