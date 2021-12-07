@@ -28,7 +28,7 @@ public class User {
     private String lastName;
 
     @Column(name = "username", nullable = false)
-    private String username = "testUsername";
+    private String username;
 
     @Column(name = "password", nullable = false) // length 64 matches bcrypt
     private String password; // Encode in bcrypt
@@ -42,4 +42,8 @@ public class User {
     )
     @JoinColumn(name = "user_id")
     private List<File> userFiles = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "organisation_id")
+    private Organisation organisation;
 }

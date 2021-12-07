@@ -2,7 +2,6 @@ package graphium.graphiumteam8.service;
 
 import graphium.graphiumteam8.entity.User;
 import graphium.graphiumteam8.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,5 +30,10 @@ public class UserService {
         }
 
         return listOfUsernames;
+    }
+
+    public void saveUser(User user){
+
+        userRepository.save(user);
     }
 }

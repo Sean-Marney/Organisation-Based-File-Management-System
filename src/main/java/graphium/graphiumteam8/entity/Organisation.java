@@ -29,4 +29,11 @@ public class Organisation {
     )
     @JoinColumn(name = "organisation_id")
     private List<PartnerOrganisation> partnerOrganisations = new ArrayList<>();
+
+    @OneToMany(
+             cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JoinColumn(name = "organisation_id")
+    private List<User> usersOfOrganisation = new ArrayList<>();
 }

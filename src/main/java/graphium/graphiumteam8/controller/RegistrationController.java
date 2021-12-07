@@ -2,30 +2,36 @@ package graphium.graphiumteam8.controller;
 
 import graphium.graphiumteam8.entity.Organisation;
 import graphium.graphiumteam8.entity.User;
-import graphium.graphiumteam8.repository.UserRepository;
+import graphium.graphiumteam8.service.OrganisationService;
 import graphium.graphiumteam8.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 public class RegistrationController {
 
-    private final UserRepository userRepository;
     private final UserService userService;
+    private final OrganisationService organisationService;
 
-    public RegistrationController(UserRepository userRepository, UserService userService) {
-        this.userRepository = userRepository;
+    public RegistrationController(UserService userService, OrganisationService organisationService) {
         this.userService = userService;
+        this.organisationService = organisationService;
     }
 
     @GetMapping("/register")
     public String getRegistrationForm(Model model){
 
+        // TODO i want to assign this to a user
+        List<Organisation> availableOrganisations = organisationService.listOrganisations();
+
         // Create new user object to be sent to form
         model.addAttribute("user", new User());
-        model.addAttribute("organisation", new Organisation());
+        // Choose from list of available organisations
+        model.addAttribute("availableOrganisations", availableOrganisations);
 
         return "registration-form";
     }
@@ -33,7 +39,7 @@ public class RegistrationController {
     @PostMapping("/register-form")
     public String registerForm(User user){
 
-        userRepository.save(user); // Save new user to database
+        userService.saveUser(user); // Save new user to database
 
         return "register-form-result";
     }

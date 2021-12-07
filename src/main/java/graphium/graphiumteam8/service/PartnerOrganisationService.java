@@ -35,19 +35,4 @@ public class PartnerOrganisationService {
 
         return listOfPartnerOrganisationNames;
     }
-
-    /*
-    public void addPartnerOrganisation(Organisation organisation){
-
-        listPartnerOrganisations().add(partnerOrganisation);
-        System.out.println(listPartnerOrganisations());
-    }
-
-    public void removePartnerOrganisation(Organisation organisation){
-
-        listPartnerOrganisations().remove(partnerOrganisation);
-        System.out.println(listPartnerOrganisations());
-    }
-
-     */
 }

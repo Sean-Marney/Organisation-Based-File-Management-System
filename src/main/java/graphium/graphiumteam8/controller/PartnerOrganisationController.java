@@ -28,11 +28,4 @@ public class PartnerOrganisationController {
         return "partner-organisations";
     }
 
-    @PostMapping("/partner-organisations/add-new-partner")
-    public void addNewOrganisationPartnerForm(PartnerOrganisation partnerOrganisation){
-
-
-    }
-
-
 }
