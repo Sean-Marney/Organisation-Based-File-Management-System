@@ -42,8 +42,8 @@ public class RegistrationController {
         user.setRole("USER");
         user.setEnabled(Boolean.TRUE);
 
-        //hashing incoming passwords
-//        user.setPassword(encoder.encode(user.getPassword()));*******************
+//        hashing incoming passwords
+        user.setPassword(encoder.encode(user.getPassword()));
 
         userRepository.save(user); // Save new user to database
 
