@@ -1,7 +1,7 @@
 package graphium.graphiumteam8.service;
 
 import graphium.graphiumteam8.entity.Organisation;
-import graphium.graphiumteam8.repository.OrganisationDAO;
+import graphium.graphiumteam8.repository.OrganisationRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,16 +10,16 @@ import java.util.List;
 @Service
 public class OrganisationService {
 
-    private final OrganisationDAO organisationDAO;
+    private final OrganisationRepository organisationRepository;
 
-    public OrganisationService(OrganisationDAO organisationDAO) {
-        this.organisationDAO = organisationDAO;
+    public OrganisationService(OrganisationRepository organisationRepository) {
+        this.organisationRepository = organisationRepository;
     }
 
     // Returns list of organisation objects
     public List<Organisation> listOrganisations(){
 
-        return organisationDAO.findAll();
+        return organisationRepository.findAll();
     }
 
     // Returns list of organisation names to reference the objects by

@@ -2,8 +2,6 @@ package graphium.graphiumteam8.service;
 
 import graphium.graphiumteam8.entity.User;
 import graphium.graphiumteam8.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -34,17 +32,8 @@ public class UserService {
         return listOfUsernames;
     }
 
-    public String getCurrentUsername(){
+    public void saveUser(User user){
 
-        // Returning current user object
-        String username;
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if(principal instanceof User){
-            username = ((User) principal).getUsername();
-        } else {
-            username = principal.toString();
-        }
-        return username;
+        userRepository.save(user);
     }
 }

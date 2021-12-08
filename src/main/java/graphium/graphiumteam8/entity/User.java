@@ -5,7 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,12 +22,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-//    @Column(name = "first_name", nullable = false)
-//    private String firstName;
-
-//    @Column(name = "last_name", nullable = false)
-//    private String lastName;
-
     @Column(name = "username", nullable = false)
     private String username;
 
@@ -35,7 +31,6 @@ public class User {
     @Column(name = "role", nullable = false)
     private String role;
 
-    //    @Column(name = "enabled", nullable = false)
     @Column(name = "enabled", columnDefinition = "TINYINT(1)")
     private Boolean enabled;
 
@@ -56,4 +51,14 @@ public class User {
 
 //    public List<GrantedAuthority> getRoles() {
 //    }
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JoinColumn(name = "user_id")
+    private List<File> userFiles = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "organisation_id")
+    private Organisation organisation;
 }

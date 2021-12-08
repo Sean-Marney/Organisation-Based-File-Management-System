@@ -9,11 +9,11 @@ import javax.persistence.Column;
 @Data
 public class SetFileAccessForm {
 
-    private String fileAccessEveryone;
+    private String fileAccessPublic;
 
     private String fileAccessMyOrganisation;
 
-    private String fileAccessOtherOrganisation;
+    private String fileAccessPartnerOrganisation;
 
     private String fileAccessSpecificUser;
 
