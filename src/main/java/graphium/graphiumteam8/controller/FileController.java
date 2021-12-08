@@ -96,7 +96,6 @@ public class FileController {
         }
     }
 
-    // This endpoint allows the user to download/view a file from the database by its file name
     @GetMapping("/files/view/{fileName}")
     ResponseEntity<byte[]> viewFile(@PathVariable String fileName, HttpServletRequest httpServletRequest) {
 

@@ -103,8 +103,6 @@ public class FileService{
                 .body(file.getFileObject());
     }
 
-    // Logic for setting the file access \\
-
     public void setFileAccessToPublic(String fileName){
 
         publicFiles.add(fileName);

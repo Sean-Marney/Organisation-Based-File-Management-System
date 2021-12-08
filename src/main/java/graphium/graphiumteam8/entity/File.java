@@ -30,6 +30,4 @@ public class File {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-
 }
