@@ -18,22 +18,16 @@ public class Organisation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "organisation_id")
-    private int id;
+    private Integer id;
 
     @Column(name = "organisation_name")
     private String organisationName;
 
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "organisation_id")
     private List<PartnerOrganisation> partnerOrganisations = new ArrayList<>();
 
-    @OneToMany(
-             cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "organisation_id")
     private List<User> usersOfOrganisation = new ArrayList<>();
 }
