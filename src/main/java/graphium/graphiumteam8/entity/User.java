@@ -22,16 +22,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
-
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
-
     @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "pass", nullable = false) // length 64 matches bcrypt
+    @Column(name = "password", nullable = false) // length 64 matches bcrypt
     private String password; // Encode in bcrypt
 
     //    @Column(name = "enabled", nullable = false)

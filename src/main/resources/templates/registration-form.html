@@ -20,26 +20,21 @@
 
     <form th:action="@{/register-form}" method="post" th:object="${user}"
                     style="max-width: 500px; margin: 0 auto;">
-        
+
         <div>
 
-            <div class="form-group row">
-                <label class="col-form-label col-4">First Name</label>
-                <div class="col-8">
-                    <input class="form-control" type="text"
-                           th:field="*{firstName}" required
-                            minlength="2" maxlength="50">
-                </div>
-            </div>
+<!--            <div class="form-group row">-->
+<!--                <label class="col-form-label col-4">Organisation</label>-->
+<!--                <table>-->
+<!--                    <td><select name="organisation">-->
 
-            <div class="form-group row">
-                <label class="col-form-label col-4">Last Name</label>
-                <div class="col-8">
-                    <input class="form-control" type="text"
-                           th:field="*{lastName}" required
-                           minlength="2" maxlength="50">
-                </div>
-            </div>
+<!--                        <option th:each="organisation" : ${organisationList}-->
+<!--                                th:text="${organisation}"-->
+<!--                        />-->
+
+<!--                    </select></td>-->
+<!--                </table>-->
+<!--            </div>-->
 
             <div class="form-group row">
                 <label class="col-form-label col-4">Username</label>
@@ -49,21 +44,6 @@
                            minlength="2" maxlength="25">
                 </div>
             </div>
-
-<!--            <div class="form-group row">-->
-<!--                <label class="col-form-label col-4">Organisation</label>-->
-<!--                <table>-->
-<!--                    <td><select name="organisation">-->
-
-<!--                        <option th:each="organisation" : ${organisationList}-->
-<!--                        th:text="${organisation}"-->
-<!--                        />-->
-
-<!--                    </select></td>-->
-<!--                </table>-->
-<!--            </div>-->
-
-
 
             <div class="form-group row">
                 <label class="col-form-label col-4">Password</label>

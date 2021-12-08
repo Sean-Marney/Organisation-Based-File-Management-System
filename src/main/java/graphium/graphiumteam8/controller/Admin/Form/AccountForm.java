@@ -20,15 +20,7 @@ public class AccountForm implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
-
-    @NotEmpty(message = "The first name of the user must be between 2 and 60 characters.")
-    @Size(min = 2, max = 60, message = "The first name of the user must be between 2 and 60 characters.")
-    private String firstName;
-
-    @NotEmpty(message = "The last name of the user must be between 2 and 60 characters.")
-    @Size(min = 2, max = 60, message = "The last name of the user must be between 2 and 60 characters.")
-    private String lastName;
+    private Integer user_id;
 
     @NotEmpty(message = "The username of the user must be between 2 and 60 characters.")
     @Size(min = 2, max = 60, message = "The username of the user must be between 2 and 60 characters.")
