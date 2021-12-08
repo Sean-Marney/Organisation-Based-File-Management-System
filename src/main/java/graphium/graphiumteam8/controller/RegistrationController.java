@@ -17,7 +17,7 @@ public class RegistrationController {
 
     private final UserRepository userRepository;
 
-    //encoder in the controller to encode the password 
+    //encoder in the controller to encode the password
     @Autowired
     private PasswordEncoder encoder;
 
@@ -39,8 +39,8 @@ public class RegistrationController {
     @PostMapping("/register-form")
     public String registerForm(User user){
 
-//        user.setRole("USER");
-//        user.setEnabled(Boolean.TRUE);****************************
+        user.setRole("USER");
+        user.setEnabled(Boolean.TRUE);
 
         //hashing incoming passwords
 //        user.setPassword(encoder.encode(user.getPassword()));*******************
