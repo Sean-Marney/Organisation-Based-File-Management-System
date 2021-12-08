@@ -30,31 +30,33 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService);
+        auth.userDetailsService(userDetailsService);
 
 
-        auth.inMemoryAuthentication()
-                .withUser("ose")
-                .password("pass")
-                .roles("ORGANISATION")
-                .and()
-                .withUser("john")
-                .password("pass")
-                .roles("USER");
+//        auth.inMemoryAuthentication()
+//                .withUser("ose")
+//                .password("pass")
+//                .roles("ORGANISATION")
+//                .and()
+//                .withUser("john")
+//                .password("pass")
+//                .roles("USER");
 
     }
 
-//    @Bean
-//    public PasswordEncoder getPasswordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
+    @Bean
+    public PasswordEncoder getPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
 //                .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/organisation/**").hasRole("ORGANISATION")
-                .antMatchers("/user/**").hasRole("USER")
+                .antMatchers("/user/**").hasRole("USER") //this line works
+//                .antMatchers("/organisation/**").hasAuthority("ORGANISATION")
+//                .antMatchers("/user/**").hasAuthority("USER") //this line works
                 .and().formLogin()
                 .loginPage("/login")
                 .permitAll()

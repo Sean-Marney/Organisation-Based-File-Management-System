@@ -2,6 +2,8 @@ package graphium.graphiumteam8.controller;
 
 import graphium.graphiumteam8.entity.User;
 import graphium.graphiumteam8.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,10 @@ import java.util.List;
 public class RegistrationController {
 
     private final UserRepository userRepository;
+
+    //encoder in the controller to encode the password 
+    @Autowired
+    private PasswordEncoder encoder;
 
     public RegistrationController(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -32,6 +38,12 @@ public class RegistrationController {
 
     @PostMapping("/register-form")
     public String registerForm(User user){
+
+//        user.setRole("USER");
+//        user.setEnabled(Boolean.TRUE);****************************
+
+        //hashing incoming passwords
+//        user.setPassword(encoder.encode(user.getPassword()));*******************
 
         userRepository.save(user); // Save new user to database
 
