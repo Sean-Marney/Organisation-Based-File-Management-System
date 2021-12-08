@@ -21,19 +21,19 @@ public class LoginController {
     public String loginSuccess(HttpServletRequest request) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(auth.getAuthorities());
-//        if (auth.getAuthorities().contains(new SimpleGrantedAuthority("USER"))){
-//            System.out.println("It's a User");
-//            return "redirect:/user";
-//        } else if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ORGANISATION"))){
-//            System.out.println("It's a organisation");
-//            return "redirect:/organisation";*****************
-////        }
-        if (request.isUserInRole("ROLE_ADMIN")) {
-            return "redirect:/admin";
-        } else if (request.isUserInRole("ROLE_ORGANISATION")) {
-            return "redirect:/organisation";
-        } else if (request.isUserInRole("ROLE_USER")) {
+        if (auth.getAuthorities().contains(new SimpleGrantedAuthority("USER"))){
+            System.out.println("It's a User");
             return "redirect:/user";
+        } else if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ORGANISATION"))){
+            System.out.println("It's a organisation");
+            return "redirect:/organisation";
+//        }
+//        if (request.isUserInRole("ROLE_ADMIN")) {
+//            return "redirect:/admin";
+//        } else if (request.isUserInRole("ROLE_ORGANISATION")) {
+//            return "redirect:/organisation";
+//        } else if (request.isUserInRole("ROLE_USER")) {
+//            return "redirect:/user";
         }else {
             return "redirect:/error";
         }
