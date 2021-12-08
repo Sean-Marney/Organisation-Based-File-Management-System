@@ -1,0 +1,30 @@
+.bg-custom {
+    background-color: #1E4C63;
+}
+
+.navbar {
+    height: 100px;
+    min-height: 25px;
+    font-size: 1.1rem;
+    background-color: #1E4C63 !important;
+
+}
+
+#site-logo {
+    max-height: 75px;
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+
+.nav-link {
+    color: #FFFFFF !important;
+}
+
+.nav-link:hover {
+    color: #D9CDCC !important;
+}
+.page-footer font-small indigo {
+    background-color: #1E4C63;
+}
