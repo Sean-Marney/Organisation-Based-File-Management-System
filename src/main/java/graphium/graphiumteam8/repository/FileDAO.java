@@ -10,7 +10,7 @@ import java.util.List;
 // File DAO (Data Access Object) provides JPARepository, which has built-in methods for a CRUD application
 
 @Repository
-public interface FileDAO extends JpaRepository<File, Long> {
+public interface FileDAO extends JpaRepository<File, Integer> {
 
     // Finds entry using keywords 'findBy' and then will find that column in the database
     File findByFileName(String fileName);

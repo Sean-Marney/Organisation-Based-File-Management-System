@@ -1,7 +1,6 @@
-package graphium.graphiumteam8.security;
+package graphium.graphiumteam8.controller.RoleAuth;
 
-//import graphium.graphiumteam8.entity.Role;
-import graphium.graphiumteam8.entity.User;
+import org.apache.catalina.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

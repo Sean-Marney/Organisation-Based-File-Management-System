@@ -14,7 +14,7 @@ public class File {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "file_id")
-    private long id;
+    private Integer id;
 
     @Column(name = "file_name")
     private String fileName;
@@ -22,7 +22,4 @@ public class File {
     @Column(name = "file_object")
     @Lob // Allows file object storage in table
     private byte[] fileObject;
-
-    // Give the file an owner (get name when downloading)
-    private String fileOwner;
 }

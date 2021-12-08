@@ -12,13 +12,8 @@ public class Organisation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "organisation_id")
-    private long id;
+    private Integer id;
 
     @Column(name = "organisation_name")
     private String organisationName;
-
-    @Column(name = "organisation_description")
-    private String organisationDescription;
-
-
 }
