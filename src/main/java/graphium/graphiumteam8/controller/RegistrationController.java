@@ -14,18 +14,6 @@ import java.util.List;
 @Controller
 public class RegistrationController {
 
-    // Delete this if we dont need it im not sure
-//<<<<<<< HEAD
-//    private final UserRepository userRepository;
-//
-//    //encoder in the controller to encode the password
-//    @Autowired
-//    private PasswordEncoder encoder;
-//
-//    public RegistrationController(UserRepository userRepository) {
-//        this.userRepository = userRepository;
-//=======
-
     private final UserService userService;
     private final OrganisationService organisationService;
 
@@ -42,8 +30,6 @@ public class RegistrationController {
 
         // Create new user object to be sent to form
         model.addAttribute("user", new User());
-//        model.addAttribute("organisationList", organisationList);
-
         // Choose from list of available organisations
         model.addAttribute("availableOrganisations", availableOrganisations);
 
@@ -53,27 +39,21 @@ public class RegistrationController {
     @PostMapping("/register-form")
     public String registerForm(User user){
 
-        user.setRole("USER");
-        user.setEnabled(Boolean.TRUE);
-
         userService.saveUser(user); // Save new user to database
 
         return "register-form-result";
     }
 
-//    //dropdown list
-//    static List<String> organisationList = null;
-//    static {
-//        organisationList = new ArrayList<>();
-//        organisationList.add("Organisation 1");
-//        organisationList.add("Organisation 2");
-//        organisationList.add("Organisation 3");
-//        organisationList.add("Organisation 4");
-//    }
 
 
 
 
+
+
+
+
+
+    
     /*
     @GetMapping({"/registration"})
     public String getRegistration(Model model) {
@@ -95,5 +75,4 @@ public class RegistrationController {
     }
 
      */
-
 }

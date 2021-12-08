@@ -1,13 +1,11 @@
 package graphium.graphiumteam8.controller;
 
 import graphium.graphiumteam8.service.UserService;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
-@Controller
 public class UserController {
 
     private final UserService userService;
@@ -16,10 +14,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/user")
-    public String getUser() {
-        return "user";
-    }
 
     @GetMapping("/users")
     public String getUsers(Model model){

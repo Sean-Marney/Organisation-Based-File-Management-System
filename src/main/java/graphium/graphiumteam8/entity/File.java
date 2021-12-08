@@ -18,7 +18,7 @@ public class File {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "file_id")
-    private Integer id;
+    private int id;
 
     @Column(name = "file_name")
     private String fileName;
