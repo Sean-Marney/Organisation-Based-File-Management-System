@@ -26,10 +26,10 @@ public class User {
     @Column(name = "password", nullable = false) // length 64 matches bcrypt
     private String password; // Encode in bcrypt
 
-    @Column(name = "role", nullable = false)
+    @Column(name = "role")
     private String role;
 
-    @Column(name = "enabled", nullable = false)
+    @Column(name = "enabled")
     private Boolean enabled;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

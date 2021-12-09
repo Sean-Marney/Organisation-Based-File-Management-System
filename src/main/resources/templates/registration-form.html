@@ -21,10 +21,16 @@
     <form th:action="@{/register-form}" method="post" th:object="${user}"
           style="max-width: 500px; margin: 0 auto;">
 
+        <!--needs to be dropdown-->
         <div class="form-group row">
             <label class="col-form-label col-4">Choose an Organisation</label>
             <div class="col-8">
-
+                <select field="organisations">
+                    <option th:each="organisation : ${availableOrganisations}"
+                            th:value="${organisation}"
+                            th:text="${organisation}">
+                    </option>
+                </select>
             </div>
         </div>
 

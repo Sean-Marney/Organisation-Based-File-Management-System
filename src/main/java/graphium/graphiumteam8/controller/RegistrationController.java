@@ -2,8 +2,8 @@ package graphium.graphiumteam8.controller;
 
 import graphium.graphiumteam8.entity.Organisation;
 import graphium.graphiumteam8.entity.User;
-import graphium.graphiumteam8.repository.UserRepository;
 import graphium.graphiumteam8.service.OrganisationService;
+import graphium.graphiumteam8.service.TestDataService;
 import graphium.graphiumteam8.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,25 +19,27 @@ public class RegistrationController {
 
     private final UserService userService;
     private final OrganisationService organisationService;
+    private final TestDataService testDataService;
 
     @Autowired private PasswordEncoder encoder;
 
 
-    public RegistrationController(UserService userService, OrganisationService organisationService) {
+    public RegistrationController(UserService userService, OrganisationService organisationService, TestDataService testDataService) {
         this.userService = userService;
         this.organisationService = organisationService;
+        this.testDataService = testDataService;
     }
 
     @GetMapping("/register")
     public String getRegistrationForm(Model model){
 
-        // TODO i want to assign this to a user
-        List<Organisation> availableOrganisations = organisationService.listOrganisations();
+        //List<Organisation> availableOrganisations = organisationService.listOrganisations();
+        List<Organisation> testOrganisations = testDataService.getListOfTestOrganisations();
 
         // Create new user object to be sent to form
         model.addAttribute("user", new User());
         // Choose from list of available organisations
-        model.addAttribute("availableOrganisations", availableOrganisations);
+        model.addAttribute("availableOrganisations", testOrganisations);
 
 //        model.addAttribute("organisationList", organisationList);
 
