@@ -23,17 +23,13 @@ public class Organisation {
     @Column(name = "organisation_name")
     private String organisationName;
 
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    // Organisation's list of partners
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "organisation_id")
     private List<PartnerOrganisation> partnerOrganisations = new ArrayList<>();
 
-    @OneToMany(
-             cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    // Organisation's list of users
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "organisation_id")
     private List<User> usersOfOrganisation = new ArrayList<>();
 }
