@@ -7,19 +7,15 @@ public enum UserPermissions {
     ADMIN_WRITE("admin:write"),
     SYSTEMADMIN_READ("systemadmin:read"),
     SYSTEMADMIN_WRITE("systemadmin:write")
-    // Adam - Enums go here for permissions that a role can have (so, read and write)
 
     ;
 
-    private final String permission;
+    private final String permissions;
 
-    UserPermissions(String permission) {
-        this.permission = permission;
+    UserPermissions(String permissions) {
+        this.permissions = permissions;
     }
-
-    public String getPermission() {
-        return permission;
+    public String getPermission(){
+        return permissions;
     }
-
-    // Adam - create a set containing permissions (Set<SimpleGrantedAuthority> permissions) which adds to the necessary role and return permissions
 }
