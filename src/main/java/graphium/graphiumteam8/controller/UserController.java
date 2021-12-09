@@ -16,11 +16,16 @@ public class UserController {
 
 
     @GetMapping("/users")
-    public String getUsers(Model model){
+    public String getUsers(Model model) {
 
         List<String> listOfUsernames = userService.listUsernames();
         model.addAttribute("listOfUsernames", listOfUsernames);
 
         return "users";
+    }
+
+    @GetMapping("/user")
+    public String getUser() {
+        return "user";
     }
 }

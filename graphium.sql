@@ -15,68 +15,42 @@ DROP SCHEMA IF EXISTS `graphium` ;
 CREATE SCHEMA IF NOT EXISTS `graphium` DEFAULT CHARACTER SET utf8 ;
 USE `graphium` ;
 -- -----------------------------------------------------
--- Table `graphium`.`user`
+-- Table `graphium`.`users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `graphium`.`user` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(45) NOT NULL,
-  `fname` VARCHAR(45) NOT NULL,
-  `lname` VARCHAR(45) NOT NULL,
-  `email` VARCHAR(45) NOT NULL,
-  `role` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(200) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `username_UNIQUE` (`username` ASC) )
-ENGINE = InnoDB
-AUTO_INCREMENT = 3
-DEFAULT CHARACTER SET = utf8;
+DROP table IF EXISTS `graphium`.`users` ;
+CREATE TABLE IF NOT EXISTS `graphium`.`users` (
+                                                  `user_id` INT(10) NOT NULL AUTO_INCREMENT,
+                                                  `username` VARCHAR(20) NOT NULL,
+                                                  `first_name` VARCHAR(50) NOT NULL,
+                                                  `last_name` VARCHAR(50) NOT NULL,
+                                                  `pass` VARCHAR(80) NULL DEFAULT NULL,
+                                                  `enabled` TINYINT(4) NULL DEFAULT 1,
+                                                  `role` VARCHAR(50) NOT NULL,
+                                                  `organisation_id` BIGINT(10),
+                                                  PRIMARY KEY	(`user_id`),
+                                                  INDEX `organisation_idx` (`organisation_id` ASC) ,
+                                                  CONSTRAINT `fk_organisation_user1`
+                                                      FOREIGN KEY (`organisation_id`)
+                                                          REFERENCES `graphium`.`organisations` (`organisation_id`)
+                                                          ON DELETE NO ACTION
+                                                          ON UPDATE NO ACTION)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
--- Table `graphium`.`organisation`
+-- Table `graphium`.`organisations`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `graphium`.`organisation` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `institution` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `institution_UNIQUE` (`institution` ASC) )
-ENGINE = InnoDB
-AUTO_INCREMENT = 3
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE IF NOT EXISTS `graphium`.`organisations`(
+                                                         `organisation_id` BIGINT(10) NOT NULL AUTO_INCREMENT,
+                                                         `organisation_description` VARCHAR(100) NOT NULL,
+                                                         PRIMARY KEY (`organisation_id`));
 -- -----------------------------------------------------
--- Table `graphium`.`employee`
+-- Table `graphium`.`files`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `graphium`.`access` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(45) NOT NULL,
-  `institution` VARCHAR(200) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_organisation_user_idx` (`user_id` ASC) ,
-  INDEX `fk_organisation_idx` (`organisation_id` ASC) ,
-  CONSTRAINT `fk_organisation_user`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `graphium`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_organisation`
-    FOREIGN KEY (`organisation_id`)
-    REFERENCES `graphium`.`organisation` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-
-ENGINE = InnoDB
-AUTO_INCREMENT = 3
-DEFAULT CHARACTER SET = utf8;
--- -----------------------------------------------------
--- Table `graphium`.`admin`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `graphium`.`admin` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(200) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `username_UNIQUE` (`username` ASC) )
-ENGINE = InnoDB
-AUTO_INCREMENT = 3
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE IF NOT EXISTS `graphium`.`files`(
+                                                 `file_id` BIGINT(10) NOT NULL AUTO_INCREMENT,
+                                                 `file_name` VARCHAR(50) NOT NULL,
+                                                 `file_object` LONGBLOB NOT NULL,
+                                                 PRIMARY KEY (`file_id`));
 
 DELIMITER ;
 SET SQL_MODE=@OLD_SQL_MODE;

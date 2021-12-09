@@ -2,8 +2,11 @@ package graphium.graphiumteam8.controller;
 
 import graphium.graphiumteam8.entity.Organisation;
 import graphium.graphiumteam8.entity.User;
+import graphium.graphiumteam8.repository.UserRepository;
 import graphium.graphiumteam8.service.OrganisationService;
 import graphium.graphiumteam8.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +19,9 @@ public class RegistrationController {
 
     private final UserService userService;
     private final OrganisationService organisationService;
+
+    @Autowired private PasswordEncoder encoder;
+
 
     public RegistrationController(UserService userService, OrganisationService organisationService) {
         this.userService = userService;
@@ -33,6 +39,8 @@ public class RegistrationController {
         // Choose from list of available organisations
         model.addAttribute("availableOrganisations", availableOrganisations);
 
+//        model.addAttribute("organisationList", organisationList);
+
         return "registration-form";
     }
 
@@ -40,20 +48,29 @@ public class RegistrationController {
     public String registerForm(User user){
 
         userService.saveUser(user); // Save new user to database
+        user.setRole("USER");
+        user.setEnabled(Boolean.TRUE);
+
+//      hashing incoming passwords
+        user.setPassword(encoder.encode(user.getPassword()));
+
+        userService.saveUser(user); // Save new user to database
 
         return "register-form-result";
     }
 
+//    //dropdown list
+//    static List<String> organisationList = null;
+//    static {
+//        organisationList = new ArrayList<>();
+//        organisationList.add("Organisation 1");
+//        organisationList.add("Organisation 2");
+//        organisationList.add("Organisation 3");
+//        organisationList.add("Organisation 4");
+//    }
 
 
 
-
-
-
-
-
-
-    
     /*
     @GetMapping({"/registration"})
     public String getRegistration(Model model) {

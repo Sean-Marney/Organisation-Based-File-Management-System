@@ -1,6 +1,5 @@
 package graphium.graphiumteam8.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,14 +17,8 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private int id;
-
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
-
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
+    @Column(name = "user_id", nullable = false)
+    private Integer id;
 
     @Column(name = "username", nullable = false)
     private String username;
@@ -36,14 +29,30 @@ public class User {
     @Column(name = "role", nullable = false)
     private String role;
 
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_id")
     private List<File> userFiles = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "organisation_id")
     private Organisation organisation;
+
+
+//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+//    private Set<Role> roles = new HashSet<>();
+
+//    public User() {
+//    }
+//        this.username = username;
+//        this.password = password;
+//        this.role = "USER";
+//        this.enabled = Boolean.TRUE;
+
+
+//    public List<GrantedAuthority> getRoles() {
+//    }
 }
