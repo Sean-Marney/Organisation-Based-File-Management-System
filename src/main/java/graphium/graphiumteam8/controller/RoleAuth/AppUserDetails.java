@@ -12,14 +12,14 @@ public class AppUserDetails implements UserDetails {
     private String password;
     private List<GrantedAuthority> authorities;
     private Boolean enabled;
-
-    public AppUserDetails(User user) {
-        this.username = user.getUsername();
-        this.password = user.getPassword();
-        this.enabled = user.getEnabled();
-        this.authorities = Arrays.asList(new SimpleGrantedAuthority(user.getRole()));
-//        this.authorities = user.getRoles();
-    }
+//
+//    public AppUserDetails(User user) {
+//        this.username = user.getUsername();
+//        this.password = user.getPassword();
+//        this.enabled = user.getEnabled();
+//        this.authorities = Arrays.asList(new SimpleGrantedAuthority(user.getRole()));
+////        this.authorities = user.getRoles();
+//    }
 
     @Override
     public String getPassword() {
