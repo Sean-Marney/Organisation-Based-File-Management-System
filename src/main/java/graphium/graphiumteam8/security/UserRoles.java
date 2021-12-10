@@ -2,7 +2,6 @@ package graphium.graphiumteam8.security;
 
 import com.google.common.collect.Sets;
 
-
 import java.util.Set;
 
 import static graphium.graphiumteam8.security.UserPermissions.*;
