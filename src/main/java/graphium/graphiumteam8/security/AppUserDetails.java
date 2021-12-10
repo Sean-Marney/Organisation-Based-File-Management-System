@@ -1,11 +1,13 @@
-package graphium.graphiumteam8.controller.RoleAuth;
+package graphium.graphiumteam8.security;
 
-import org.apache.catalina.User;
+//import org.apache.catalina.User;
+import graphium.graphiumteam8.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
+
 
 public class AppUserDetails implements UserDetails {
     private String username;
@@ -31,6 +33,7 @@ public class AppUserDetails implements UserDetails {
     public String getUsername() {
         return username;
     }
+
 
     @Override
     public boolean isAccountNonExpired() {

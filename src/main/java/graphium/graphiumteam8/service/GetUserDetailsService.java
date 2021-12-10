@@ -1,15 +1,5 @@
 package graphium.graphiumteam8.service;
 
-import graphium.graphiumteam8.controller.RoleAuth.AppUserDetails;
-import graphium.graphiumteam8.entity.User;
-import graphium.graphiumteam8.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
-
-import java.util.Optional;
-
 //@Service
 //public class GetUserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
 //
