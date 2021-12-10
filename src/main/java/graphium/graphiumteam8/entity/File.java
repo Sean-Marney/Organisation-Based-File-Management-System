@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class File {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "file_id")
     private Integer id;
 
