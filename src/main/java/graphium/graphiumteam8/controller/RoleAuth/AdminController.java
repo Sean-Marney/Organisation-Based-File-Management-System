@@ -29,6 +29,7 @@ public class AdminController {
     @DeleteMapping("/management/delete/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_SYSTEMADMIN')")
     public void deleteUser(
+
    }
 */
     @GetMapping("/management/add")
@@ -43,7 +44,6 @@ public class AdminController {
     public String addUser(User user) {
         users.save(user);
         return "redirect:/management";
-        // Implement other 3 CRUD methods (post, delete, put) and decide their authority (hasAuthority)
-        // @PreAuthorize("hasAuthority('user:write')") for for each one beacuse they are admin
+
     }
 }
