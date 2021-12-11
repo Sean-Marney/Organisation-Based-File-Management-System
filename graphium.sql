@@ -21,8 +21,8 @@ DROP table IF EXISTS `graphium`.`users` ;
 CREATE TABLE IF NOT EXISTS `graphium`.`users` (
                                                   `user_id` INT(10) NOT NULL AUTO_INCREMENT,
                                                   `username` VARCHAR(20) NOT NULL,
-                                                  `first_name` VARCHAR(50) NOT NULL,
-                                                  `last_name` VARCHAR(50) NOT NULL,
+#                                                   `first_name` VARCHAR(50) NOT NULL,
+#                                                   `last_name` VARCHAR(50) NOT NULL,
                                                   `pass` VARCHAR(80) NULL DEFAULT NULL,
                                                   `enabled` TINYINT(4) NULL DEFAULT 1,
                                                   `role` VARCHAR(50) NOT NULL,
