@@ -4,6 +4,8 @@ import graphium.graphiumteam8.entity.Organisation;
 import graphium.graphiumteam8.entity.User;
 import graphium.graphiumteam8.service.OrganisationService;
 import graphium.graphiumteam8.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +27,8 @@ public class RegistrationController {
 //    public RegistrationController(UserRepository userRepository) {
 //        this.userRepository = userRepository;
 //=======
+        @Autowired
+    private PasswordEncoder encoder;
 
     private final UserService userService;
     private final OrganisationService organisationService;
@@ -53,8 +57,12 @@ public class RegistrationController {
     @PostMapping("/register-form")
     public String registerForm(User user){
 
+
         user.setRole("USER");
         user.setEnabled(Boolean.TRUE);
+
+//      hashing incoming passwords
+        user.setPassword(encoder.encode(user.getPassword()));
 
         userService.saveUser(user); // Save new user to database
 
