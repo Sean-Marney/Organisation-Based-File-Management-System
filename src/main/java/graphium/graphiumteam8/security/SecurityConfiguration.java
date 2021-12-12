@@ -59,10 +59,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/organisations/**").hasRole(UserRoles.ADMIN.name())
-                .antMatchers("/user/**").hasAuthority("USER") //this line works
                 .antMatchers("/login", "/css/*","/register")
                 .permitAll()
+                .antMatchers("/organisations/**").hasRole(UserRoles.ADMIN.name())
+                .antMatchers("/user/**").hasRole(UserRoles.USER.name()) //this line works
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -80,7 +80,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         UserDetails AdamKalUser = User.builder()
                 .username("AdamK")
                 .password(passwordEncoder().encode("password"))
-                .roles(UserRoles.USER.name())
+                .roles(UserRoles.ADMIN.name())
                 .build();
         return new InMemoryUserDetailsManager(
                 AdamKalUser
