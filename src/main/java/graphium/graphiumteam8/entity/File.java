@@ -15,7 +15,7 @@ import java.util.List;
 public class File {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "file_id")
     private Integer id;
 

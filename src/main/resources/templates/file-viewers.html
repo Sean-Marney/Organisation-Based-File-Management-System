@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Files</title>
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+    <div th:replace="fragments/header :: header"/>
+</head>
+<body>
+<div class="container text-center">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col"><b>Viewer</b></th>
+            <th scope="col"><b>Times</b></th>
+            <th scope="col"><b>Last View</b></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="view : ${views}">
+            <td th:text="${view.username}"></td>
+            <td th:text="${view.times}"></td>
+            <td th:text="${view.last}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="fragments/footer :: bootstrap-js"/>
+</div>
+</body>
+</html>
