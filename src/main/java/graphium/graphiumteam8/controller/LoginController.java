@@ -31,9 +31,45 @@ public class LoginController {
                 System.out.println("It's an Admin");
                 return "redirect:/management";
             }
+            // ADAM HERE
         }
-        return "redirect:error";
+        return "redirect:/";
     }
 }
+
+
+
+
+
+
+
+//        if (auth.getAuthorities().contains(new SimpleGrantedAuthority("USER"))){
+//            System.out.println("It's a User");
+//            return "redirect:/user";
+//        } else if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ORGANISATION"))){
+//            System.out.println("It's a organisation");
+//            return "redirect:/organisation";
+//        }
+//        if (request.isUserInRole("ROLE_ADMIN")) {
+//            return "redirect:/admin";
+//        } else if (request.isUserInRole("ROLE_ORGANISATION")) {
+//            return "redirect:/organisation";
+//        } else if (request.isUserInRole("ROLE_USER")) {
+//            return "redirect:/user";
+
+//    @GetMapping("/organisation")
+//    public String organisation() {
+//        return "organisation";
+//    }
+//
+//    @GetMapping("/user")
+//    public String user() {
+//        return "user";
+//    }
+
+//    @GetMapping("/register")
+//    public String register() {
+//        return "register";
+//    }
 
 
