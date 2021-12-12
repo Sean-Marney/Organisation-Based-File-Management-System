@@ -38,14 +38,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
 
-//        auth.inMemoryAuthentication()
-//                .withUser("ose")
-//                .password("pass")
-//                .roles("ORGANISATION")
-//                .and()
-//                .withUser("john")
-//                .password("pass")
-//                .roles("USER");
 
         authenticationProvider.setUserDetailsService(userDetailsService());
         authenticationProvider.setPasswordEncoder(passwordEncoder());
@@ -64,9 +56,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-//                .antMatchers("/organisation/**").hasRole("ORGANISATION")
-//                .antMatchers("/user/**").hasRole("USER")
                 .antMatchers("/organisation/**").hasAuthority("ORGANISATION")
                 .antMatchers("/user/**").hasAuthority("USER") //this line works
                 .and()
