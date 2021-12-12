@@ -20,7 +20,6 @@ public class Organisation {
     @Column(name = "organisation_id")
     private Integer id;
 
-    @Column(name = "organisation_name")
     private String organisationName;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

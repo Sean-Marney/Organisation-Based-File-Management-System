@@ -3,34 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
 
-
+    <div th:replace="fragments/header :: header"/>
 </head>
 <body>
 
 <div>
-<!-- Login form for the user to sign in to there account and access  -->
+    <!-- Login form for the user to sign in to there account and access  -->
 
-    <p th:if="${loginErrror}" class="error"></p>
-<form name="login" class="text-center border border-light p-5" th:action="@{/login}" method="post">
-<!--    <form name="login" class="text-center border border-light p-5" th:action="@{/login}" method="post">-->
-    <fieldset>
-        <legend class="h4 mb-4">Sign in</legend>
-        <div th:if="${param.error}" class="alert alert-error">
-<!--            <span th:text="#{login.error}"/>-->
-            Invalid username or password.
-        </div>
-<!--        <label for="username">Username</label>-->
-        <input type="text" id="username" name="username" class="form-control mb-4" placeholder="Username">
-        <br>
-<!--        <label for="password">Password</label>-->
-        <input type="password" id="password" name="password" class="form-control mb-4" placeholder="Password">
+    <p class="error" th:if="${loginError}"></p>
+    <form class="text-center border border-light p-5" method="post" name="login" th:action="@{/login}">
+        <!--    <form name="login" class="text-center border border-light p-5" th:action="@{/login}" method="post">-->
+        <fieldset>
+            <legend class="h4 mb-4">Sign in</legend>
+            <div class="alert alert-error" th:if="${param.error}">
+                <!--            <span th:text="#{login.error}"/>-->
+                Invalid username or password.
+            </div>
+            <!--        <label for="username">Username</label>-->
+            <input class="form-control mb-4" id="username" maxlength="25" minlength="2" name="username"
+                   placeholder="Username" type="text">
+            <br>
+            <!--        <label for="password">Password</label>-->
+            <input class="form-control mb-4" id="password" name="password" placeholder="Password" type="password">
 
-        <button class="btn btn-block my-4 btn-primary" type="submit">Sign in</button>
-    </fieldset>
+            <button class="btn btn-block my-4 btn-primary" type="submit">Sign in</button>
+        </fieldset>
 
-</form>
+    </form>
 </div>
 
 </body>

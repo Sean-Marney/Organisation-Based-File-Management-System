@@ -1,18 +1,21 @@
 package graphium.graphiumteam8.service;
 
 import graphium.graphiumteam8.entity.File;
+import graphium.graphiumteam8.entity.FileView;
+import graphium.graphiumteam8.entity.User;
 import graphium.graphiumteam8.repository.FileRepository;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -23,12 +26,8 @@ import java.util.Objects;
 // Business logic for the file system which is passed to controller
 
 @Service
-public class FileService{
-
-    // TODO: Encapsulation issue
-    public List<String> publicFiles = new ArrayList<>();
-    public List<String> organisationFiles = new ArrayList<>();
-    public List<String> partnerOrganisationFiles = new ArrayList<>();
+@Data
+public class FileService {
 
     private final FileRepository fileRepository;
 
@@ -38,17 +37,15 @@ public class FileService{
     }
 
     // Returns list of files
-    public List<File> listFiles(){
-
+    public List<File> listFiles() {
         return fileRepository.findAll();
     }
 
     // Returns list of file names
-    public List<String> listFileNames(){
-
+    public List<String> listFileNames() {
         List<String> listOfFileNames = new ArrayList<>();
 
-        for(File file : listFiles()){
+        for (File file : listFiles()) {
             listOfFileNames.add(file.getFileName());
         }
 
@@ -60,17 +57,11 @@ public class FileService{
 
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
 
-        String fileType = multipartFile.getContentType(); // Currently not being used
-
-        String fileUrl = ServletUriComponentsBuilder.fromCurrentContextPath() // CurrentContextPath returns current URL (so, localhost:8080)
-                .path("/download/") // localhost:8080/download
-                .path(fileName) // localhost:8080/download/my_file.pdf
-                .toUriString(); // Builds string to create URL, which contains the file content
-
         // Creating new file object, containing user's file, and saving it to the database
         File newFile = new File();
         newFile.setFileName(fileName);
         newFile.setFileObject(multipartFile.getBytes());
+        newFile.setUser(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()));
         fileRepository.save(newFile); // Saves file to database
 
         redirectAttributes.addFlashAttribute("uploadMessage", "File upload successful"); // Alerts user of successful upload
@@ -78,21 +69,28 @@ public class FileService{
         return "redirect:/files/upload";
     }
 
-    public ResponseEntity<byte[]> viewFile(@PathVariable String fileName, HttpServletRequest httpServletRequest){
-
-        File file = fileRepository.findByFileName(fileName);
+    public ResponseEntity<byte[]> viewFile(@PathVariable String fileName, HttpServletRequest httpServletRequest) {
+        File file = fileRepository.findByFileName(fileName).orElse(null);
 
         String fileType = httpServletRequest.getServletContext().getMimeType(file.getFileName());
 
+        addView(file);
+        fileRepository.save(file);
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(fileType))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "inline;fileName=" + file.getFileName()) // Renders file inline to browser
                 .body(file.getFileObject());
     }
 
-    public ResponseEntity<byte[]> downloadFile(@PathVariable String fileName, HttpServletRequest httpServletRequest){
+    private void addView(File file) {
+        final User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        final FileView e = new FileView();
+        e.setUser(principal);
+        file.getViews().add(e);
+    }
 
-        File file = fileRepository.findByFileName(fileName);
+    public ResponseEntity<byte[]> downloadFile(@PathVariable String fileName, HttpServletRequest httpServletRequest) {
+        File file = fileRepository.findByFileName(fileName).orElse(null);
 
         String fileType = httpServletRequest.getServletContext().getMimeType(file.getFileName());
 
@@ -103,18 +101,36 @@ public class FileService{
                 .body(file.getFileObject());
     }
 
-    public void setFileAccessToPublic(String fileName){
-
-        publicFiles.add(fileName);
+    public void setFileAccessToPublic(String fileName) {
+        fileRepository.findByFileName(fileName).ifPresent(file -> {
+            file.setAccessType(File.FileAccessType.PUBLIC);
+            fileRepository.save(file);
+        });
     }
 
-    public void setFileAccessToMyOrganisation(String fileName){
-
-        organisationFiles.add(fileName);
+    public void setFileAccessToMyOrganisation(String fileName) {
+        fileRepository.findByFileName(fileName).ifPresent(file -> {
+            file.setAccessType(File.FileAccessType.ORGANISATION);
+            fileRepository.save(file);
+        });
     }
 
-    public void setFileAccessToPartnerOrganisation(String fileName){
+    public void setFileAccessToPartnerOrganisation(String fileName) {
+        fileRepository.findByFileName(fileName).ifPresent(file -> {
+            file.setAccessType(File.FileAccessType.PARTNER);
+            fileRepository.save(file);
+        });
+    }
 
-        partnerOrganisationFiles.add(fileName);
+    public List<File> getPublicFiles() {
+        return fileRepository.findAllByAccessType(File.FileAccessType.PUBLIC);
+    }
+
+    public List<File> getPartnerOrganisationFiles() {
+        return fileRepository.findAllByAccessType(File.FileAccessType.PARTNER);
+    }
+
+    public List<File> getOrganisationFiles() {
+        return fileRepository.findAllByAccessType(File.FileAccessType.ORGANISATION);
     }
 }

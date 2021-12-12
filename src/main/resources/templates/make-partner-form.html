@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Partnership</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
 </head>
 <body>
 
 <div>
 
-    <form th:action="@{/partner-organisations/partner-form}" method="post" th:object="${partnerOrganisation}"
-        style="max-width: 500px; margin: 0 auto;">
+    <form method="post" style="max-width: 500px; margin: 0 auto;" th:action="@{/partner-organisations/partner-form}"
+          th:object="${partnerOrganisation}">
 
         <div class="form-group row">
             <label class="col-form-label col-4">...</label>
             <div class="col-8">
-                <input class="form-control" type="text"
-                       th:field="*{}" required
-                       minlength="2" maxlength="20">
+                <input class="form-control" maxlength="20"
+                       minlength="2" required
+                       th:field="*{}" type="text">
             </div>
         </div>
 

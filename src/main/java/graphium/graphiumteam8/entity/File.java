@@ -5,8 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
-// Entity class is responsible for mapping data to a table in the database (similar to DTO, except DTO is not mapped to a table like entity classes are)
+import java.util.List;
 
 @Entity
 @Table(name = "files")
@@ -20,14 +19,22 @@ public class File {
     @Column(name = "file_id")
     private Integer id;
 
-    @Column(name = "file_name")
     private String fileName;
 
-    @Column(name = "file_object")
     @Lob // Allows file object storage in table
     private byte[] fileObject;
 
-    @ManyToOne
+    @ManyToOne // todo: check this line (probably not working due to database restrictions)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Enumerated(EnumType.STRING)
+    private FileAccessType accessType = FileAccessType.PRIVATE;
+
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<FileView> views;
+
+    public enum FileAccessType {
+        PRIVATE, PUBLIC, PARTNER, ORGANISATION
+    }
 }

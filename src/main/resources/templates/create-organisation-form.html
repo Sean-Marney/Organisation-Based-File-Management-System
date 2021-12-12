@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Create organisation</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
     <div th:replace="fragments/header :: header"/>
 </head>
 <body>
@@ -11,34 +12,24 @@
 <div class="container text-center">
     <h1>Create new organisation</h1>
 
-    <form th:action="@{/organisations/create-form}" method="post" th:object="${organisation}"
-        style="max-width: 500px; margin: 0 auto;">
-        
+    <form method="post" style="max-width: 500px; margin: 0 auto;" th:action="@{/organisations/create-form}"
+          th:object="${organisation}">
+
         <div>
 
             <div class="form-group row">
                 <label class="col-form-label col-4">Organisation Name</label>
                 <div class="col-8">
-                    <input class="form-control" type="text"
-                            th:field="*{organisationName}" required
-                            minlength="2" maxlength="20">
+                    <label>
+                        <input class="form-control" maxlength="20"
+                               minlength="2" required
+                               th:field="*{organisationName}" type="text">
+                    </label>
                 </div>
             </div>
 
             <div>
-                <div class="form-group row">
-                    <label class="col-form-label col-4">Organisation Description</label>
-                    <div class="col-8">
-                        <input class="form-control" type="text"
-                               th:field="*{organisationDescription}" required
-                               minlength="3" maxlength="100">
-                    </div>
-                </div>
-
-                <div>
-                    <button class="btn btn-primary" type="submit">Create Organisation</button>
-                </div>
-
+                <button class="btn btn-primary" type="submit">Create Organisation</button>
             </div>
         </div>
     </form>

@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Send files</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
     <div th:replace="fragments/header :: header"/>
 </head>
 <body>
 
 <div class="container text-center">
     <h2>Set file access</h2>
-    <form th:action="@{/files/file-access/} + ${fileName}" th:object="${setFileAccessForm}" method="post">
-        <p><b>File access:</b><br>Public <input type="radio" th:field="*{fileAccessPublic}" value="choicePublic"></p>
-        <p><b>File access:</b><br>My Organisation <input type="radio" th:field="*{fileAccessMyOrganisation}" value="choiceMyOrganisation"></p>
-        <p><b>File access:</b><br>Partner Organisation <input type="radio" th:field="*{fileAccessPartnerOrganisation}" value="choicePartnerOrganisation"></p>
-        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset"></p>
+    <form method="post" th:action="@{/files/file-access/} + ${fileName}" th:object="${setFileAccessForm}">
+        <p><b>File access:</b><br>Public <input th:field="*{fileAccessPublic}" type="radio" value="choicePublic"></p>
+        <p><b>File access:</b><br>My Organisation <input th:field="*{fileAccessMyOrganisation}" type="radio"
+                                                         value="choiceMyOrganisation"></p>
+        <p><b>File access:</b><br>Partner Organisation <input th:field="*{fileAccessPartnerOrganisation}" type="radio"
+                                                              value="choicePartnerOrganisation"></p>
+        <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"></p>
     </form>
 </div>
 

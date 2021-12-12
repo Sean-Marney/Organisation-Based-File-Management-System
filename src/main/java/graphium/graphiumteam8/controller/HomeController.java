@@ -12,9 +12,9 @@ import java.time.LocalDate;
 public class HomeController {
 
     @GetMapping({"/", "index"})
-    public String index(Model model){
+    public String index(Model model) {
         model.addAttribute("today", LocalDate.now());
         return "index";
     }
-    
+
 }

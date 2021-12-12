@@ -6,16 +6,15 @@ public enum UserPermissions {
     ADMIN_READ("admin:read"),
     ADMIN_WRITE("admin:write"),
     SYSTEMADMIN_READ("systemadmin:read"),
-    SYSTEMADMIN_WRITE("systemadmin:write")
-
-    ;
+    SYSTEMADMIN_WRITE("systemadmin:write");
 
     private final String permissions;
 
     UserPermissions(String permissions) {
         this.permissions = permissions;
     }
-    public String getPermission(){
+
+    public String getPermission() {
         return permissions;
     }
 }

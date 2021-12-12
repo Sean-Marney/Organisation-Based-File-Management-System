@@ -1,6 +1,6 @@
 package graphium.graphiumteam8.security;
 
-
+import graphium.graphiumteam8.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -12,58 +12,42 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true) // Allows you to secure methods with @PreAuthorize
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    private final UserService userService;
+
+    public SecurityConfiguration(UserService userService) { // Needed for everything...
+        this.userService = userService;
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService);
-//    }
-
     public DaoAuthenticationProvider daoAuthenticationProvider() {
-
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
 
-//        auth.inMemoryAuthentication()
-//                .withUser("ose")
-//                .password("pass")
-//                .roles("ORGANISATION")
-//                .and()
-//                .withUser("john")
-//                .password("pass")
-//                .roles("USER");
-
-        authenticationProvider.setUserDetailsService(userDetailsService());
+        authenticationProvider.setUserDetailsService(userService);
         authenticationProvider.setPasswordEncoder(passwordEncoder());
 
         return authenticationProvider;
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(daoAuthenticationProvider());
     }
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-//                .antMatchers("/organisation/**").hasRole("ORGANISATION")
-//                .antMatchers("/user/**").hasRole("USER") //this line works
-                .antMatchers("/organisation/**").hasAuthority("ORGANISATION")
-                .antMatchers("/user/**").hasAuthority("USER") //this line works
-                .and().formLogin()
-                .loginPage("/login")
-                .permitAll()
+                .and()
+                .formLogin()
+                .loginPage("/login").permitAll()
                 .defaultSuccessUrl("/login-success");
     }
 }

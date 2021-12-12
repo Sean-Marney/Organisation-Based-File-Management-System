@@ -17,20 +17,24 @@ public class OrganisationService {
     }
 
     // Returns list of organisation objects
-    public List<Organisation> listOrganisations(){
+    public List<Organisation> listOrganisations() {
 
         return organisationRepository.findAll();
     }
 
     // Returns list of organisation names to reference the objects by
-    public List<String> listOrganisationNames(){
+    public List<String> listOrganisationNames() {
 
         List<String> listOfOrganisationNames = new ArrayList<>();
 
-        for(Organisation organisation : listOrganisations()){
+        for (Organisation organisation : listOrganisations()) {
             listOfOrganisationNames.add(organisation.getOrganisationName());
         }
 
         return listOfOrganisationNames;
+    }
+
+    public void save(Organisation organisation) {
+        organisationRepository.save(organisation);
     }
 }

@@ -1,19 +1,30 @@
 package graphium.graphiumteam8.entity;
 
-import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import javax.persistence.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
-@Entity
-@Table(name = "roles")
-@Data
-public class Role {
+public enum Role {
+    ADMIN(), USER(), ORGANISATION();
 
-    @Id
-    @Column(name = "role_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private final String[] authorities; // TODO: add authorities via constructor if needed...
 
-    @Column(name = "role_name")
-    private String name;
+    Role(String... authorities) {
+        this.authorities = authorities;
+    }
+
+    public List<GrantedAuthority> getGrantedAuthorities() {
+        final List<String> authorities = Arrays
+                .stream(this.authorities)
+                .collect(Collectors.toList());
+        authorities.add("ROLE_" + name());
+
+        return authorities
+                .stream()
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
+    }
 }

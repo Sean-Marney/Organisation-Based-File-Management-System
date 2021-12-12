@@ -2,14 +2,15 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="/static/js/confirm-password.js"></script>
     <title>Account Registration </title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
 
     <div th:replace="fragments/header :: header"/>
 </head>
@@ -18,8 +19,8 @@
 <div class="container text-center">
     <h1>Create Graphium Account</h1>
 
-    <form th:action="@{/register-form}" method="post" th:object="${user}"
-          style="max-width: 500px; margin: 0 auto;">
+    <form method="post" style="max-width: 500px; margin: 0 auto;" th:action="@{/register-form}"
+          th:object="${user}">
 
         <!--
         <div>
@@ -34,39 +35,38 @@
                 </div>
             </div>
             -->
-        
+
         <div>
 
             <div class="form-group row">
                 <label class="col-form-label col-4">Username</label>
                 <div class="col-8">
-                    <input class="form-control" type="text"
-                           th:field="*{username}" required
-                           minlength="2" maxlength="25">
+                    <input class="form-control" maxlength="25"
+                           minlength="2" required
+                           th:field="*{username}" type="text">
                 </div>
             </div>
 
-<!--            <div class="form-group row">-->
-<!--                <label class="col-form-label col-4">Organisation</label>-->
-<!--                <table>-->
-<!--                    <td><select name="organisation">-->
+            <!--            <div class="form-group row">-->
+            <!--                <label class="col-form-label col-4">Organisation</label>-->
+            <!--                <table>-->
+            <!--                    <td><select name="organisation">-->
 
-<!--                        <option th:each="organisation" : ${organisationList}-->
-<!--                        th:text="${organisation}"-->
-<!--                        />-->
+            <!--                        <option th:each="organisation" : ${organisationList}-->
+            <!--                        th:text="${organisation}"-->
+            <!--                        />-->
 
-<!--                    </select></td>-->
-<!--                </table>-->
-<!--            </div>-->
-
+            <!--                    </select></td>-->
+            <!--                </table>-->
+            <!--            </div>-->
 
 
             <div class="form-group row">
                 <label class="col-form-label col-4">Password</label>
                 <div class="col-8">
-                    <input class="form-control" type="password"
-                           th:field="*{password}" required
-                           minlength="5" maxlength="20">
+                    <input class="form-control" maxlength="20"
+                           minlength="5" required
+                           th:field="*{password}" type="password">
                 </div>
             </div>
 
@@ -75,111 +75,109 @@
             </div>
 
         </div>
-        
+
     </form>
 
 </div>
 
 
-
-
-    <!--/*@thymesVar id="accountForm" type="graphium"
-    <div>
-    <form id="register" class="border-light p-5 needs-validation" th:action="@{/applicant-register}"
-          th:method="post" th:object="${accountForm}" novalidate>
-        <label> First Name </label> <label>
-            <input title="Enter your First Name" type="text" class="form-control" id="firstName" th:field="*{firstname}"
-                   required>
-        </label>
-    <br>
-        <label> Last Name </label> <label>
-        <input title="Enter your Last Name" type="text" class="form-control" id="lastName" th:field="*{lastname}"
+<!--/*@thymesVar id="accountForm" type="graphium"
+<div>
+<form id="register" class="border-light p-5 needs-validation" th:action="@{/applicant-register}"
+      th:method="post" th:object="${accountForm}" novalidate>
+    <label> First Name </label> <label>
+        <input title="Enter your First Name" type="text" class="form-control" id="firstName" th:field="*{firstname}"
                required>
     </label>
-        <br>
-        <label> Username </label> <label>
-        <input title="Enter your username" type="text" class="form-control" id="username" th:field="*{username}"
-               required>
-    </label>
+<br>
+    <label> Last Name </label> <label>
+    <input title="Enter your Last Name" type="text" class="form-control" id="lastName" th:field="*{lastname}"
+           required>
+</label>
     <br>
-        <label> Email </label> <label>
-        <input title="Please enter the same Password as above" type="email" class="form-control" id="email"
-               name="email" th:field="*{email}" required>
-    </label>
-        <br>
-        <label> Password </label> <label>
-        <input title="Password must contain at least 6 characters, including UPPER/lowercase and numbers"
-               type="text" class="form-control password" id="password" name="password"
-               th:field="*{password}" onkeyup='check();'>
-        </label>
+    <label> Username </label> <label>
+    <input title="Enter your username" type="text" class="form-control" id="username" th:field="*{username}"
+           required>
+</label>
+<br>
+    <label> Email </label> <label>
+    <input title="Please enter the same Password as above" type="email" class="form-control" id="email"
+           name="email" th:field="*{email}" required>
+</label>
     <br>
-        <label> Confirm Password </label> <label>
-        <input title="Please enter the same Password as above" type="password" class="form-control confirmPassword" id="confirm_password"
-               name="confirm_password" onkeyup='check();'>
+    <label> Password </label> <label>
+    <input title="Password must contain at least 6 characters, including UPPER/lowercase and numbers"
+           type="text" class="form-control password" id="password" name="password"
+           th:field="*{password}" onkeyup='check();'>
     </label>
-        <br>
-        <label> Organisation </label> <label>
-        <input>
-    </label>
+<br>
+    <label> Confirm Password </label> <label>
+    <input title="Please enter the same Password as above" type="password" class="form-control confirmPassword" id="confirm_password"
+           name="confirm_password" onkeyup='check();'>
+</label>
     <br>
-        <button  name="submit" type="submit" class="button btn btn-primary">Submit</button>
-    </form>
+    <label> Organisation </label> <label>
+    <input>
+</label>
+<br>
+    <button  name="submit" type="submit" class="button btn btn-primary">Submit</button>
+</form>
 </div>
 
 
 <script>
-    // validation script = "https://www.w3schools.com/bootstrap4/tryit.asp?filename=trybs_form_validation_needs&stacked=h"
+// validation script = "https://www.w3schools.com/bootstrap4/tryit.asp?filename=trybs_form_validation_needs&stacked=h"
 
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-            // Get the forms we want to add validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
+(function() {
+    'use strict';
+    window.addEventListener('load', function() {
+        // Get the forms we want to add validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+})();
 </script>
 
 <script type="text/javascript">
-    document.querySelector('.button').onclick = function(){
-        var password = document.querySelector('.password').value,
-            confirmPassword = document.querySelector('.confirmPassword').value;
+document.querySelector('.button').onclick = function(){
+    var password = document.querySelector('.password').value,
+        confirmPassword = document.querySelector('.confirmPassword').value;
 
-        if(password === ""){
-            alert("Password is empty, please try again")
-        } else if(password !== confirmPassword){
-            alert("Password didn't match, please try again")
-        } else if(password === confirmPassword){
-            alert("Password match.")
-        }
-
+    if(password === ""){
+        alert("Password is empty, please try again")
+    } else if(password !== confirmPassword){
+        alert("Password didn't match, please try again")
+    } else if(password === confirmPassword){
+        alert("Password match.")
     }
+
+}
 </script>
 <script>
-    //   script below from = https://stackoverflow.com/questions/21727317/how-to-check-confirm-password-field-in-form-without-reloading-page
-    var check = function() {
-        if (document.getElementById('password').value ===
-            document.getElementById('confirm_password').value) {
-            document.getElementById('message').style.color = 'green';
-            document.getElementById('message').innerHTML = 'matching';
-        } else {
-            document.getElementById('message').style.color = 'red';
-            document.getElementById('message').innerHTML = 'not matching';
-        }
+//   script below from = https://stackoverflow.com/questions/21727317/how-to-check-confirm-password-field-in-form-without-reloading-page
+var check = function() {
+    if (document.getElementById('password').value ===
+        document.getElementById('confirm_password').value) {
+        document.getElementById('message').style.color = 'green';
+        document.getElementById('message').innerHTML = 'matching';
+    } else {
+        document.getElementById('message').style.color = 'red';
+        document.getElementById('message').innerHTML = 'not matching';
     }
+}
 
 </script>
 
-    */-->
+*/-->
 
 <div th:replace="fragments/footer :: bootstrap-js"></div>
 </body>

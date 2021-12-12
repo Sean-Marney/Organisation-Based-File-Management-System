@@ -1,8 +1,6 @@
 package graphium.graphiumteam8.service;
 
-import graphium.graphiumteam8.entity.Organisation;
 import graphium.graphiumteam8.entity.PartnerOrganisation;
-import graphium.graphiumteam8.repository.OrganisationRepository;
 import graphium.graphiumteam8.repository.PartnerOrganisationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,16 +18,16 @@ public class PartnerOrganisationService {
         this.partnerOrganisationRepository = partnerOrganisationRepository;
     }
 
-    public List<PartnerOrganisation> listPartnerOrganisations(){
+    public List<PartnerOrganisation> listPartnerOrganisations() {
 
         return partnerOrganisationRepository.findAll();
     }
 
-    public List<String> listPartnerOrganisationNames(){
+    public List<String> listPartnerOrganisationNames() {
 
         List<String> listOfPartnerOrganisationNames = new ArrayList<>();
 
-        for(PartnerOrganisation partnerOrganisation : listPartnerOrganisations()){
+        for (PartnerOrganisation partnerOrganisation : listPartnerOrganisations()) {
             listOfPartnerOrganisationNames.add(partnerOrganisation.getPartnerOrganisationName());
         }
 

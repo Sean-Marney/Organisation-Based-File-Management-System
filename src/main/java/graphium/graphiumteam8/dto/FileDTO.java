@@ -23,7 +23,7 @@ public class FileDTO {
     // Wrapper object to hold list of files submitted for view (/files)
     private List<File> dtoFileNames;
 
-    public void addFile(File file){
+    public void addFile(File file) {
         this.dtoFileNames.add(file);
     }
 }

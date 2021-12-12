@@ -2,7 +2,6 @@ package graphium.graphiumteam8.controller;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,7 +14,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @AutoConfigureMockMvc
 public class FileControllerTests {
 
-    @Autowired MockMvc mockMvc;
+    @Autowired
+    MockMvc mockMvc;
 
     @Test
     @DisplayName("File upload test")
@@ -31,7 +31,7 @@ public class FileControllerTests {
         );
         // MockMvc passes the mock file through the /upload endpoint
         this.mockMvc.perform(MockMvcRequestBuilders.multipart("/upload")
-                .file(mockMultipartFile))
+                        .file(mockMultipartFile))
                 .andExpect(MockMvcResultMatchers.status().isOk()); // Checks status is OK (HTTP response = 200)
 
     }
@@ -45,7 +45,7 @@ public class FileControllerTests {
                 "test-file.txt",
                 "text/plain",
                 "Content"
-                .getBytes()
+                        .getBytes()
         );
         this.mockMvc.perform(MockMvcRequestBuilders.multipart("/download"));
     }
