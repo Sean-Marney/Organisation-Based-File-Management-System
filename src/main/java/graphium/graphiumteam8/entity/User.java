@@ -21,7 +21,7 @@ public class User {
     @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "password", nullable = false) // length 64 matches bcrypt
+    @Column(name = "pass", nullable = false) // length 64 matches bcrypt
     private String password; // Encode in bcrypt
 
     //    @Column(name = "enabled", nullable = false)

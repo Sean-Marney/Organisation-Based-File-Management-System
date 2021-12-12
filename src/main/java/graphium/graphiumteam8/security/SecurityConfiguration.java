@@ -10,9 +10,12 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 
 @Configuration
@@ -56,8 +59,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/organisation/**").hasAuthority("ORGANISATION")
+                .antMatchers("/organisations/**").hasRole(UserRoles.ADMIN.name())
                 .antMatchers("/user/**").hasAuthority("USER") //this line works
+                .antMatchers("/login", "/css/*","/register")
+                .permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -68,6 +73,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .xssProtection()
                 .and()
                 .contentSecurityPolicy("script-src 'self'");
+    }
+    @Bean
+    @Override
+    protected UserDetailsService userDetailsService(){
+        UserDetails AdamKalUser = User.builder()
+                .username("AdamK")
+                .password(passwordEncoder().encode("password"))
+                .roles(UserRoles.USER.name())
+                .build();
+        return new InMemoryUserDetailsManager(
+                AdamKalUser
+        );
     }
 }
 

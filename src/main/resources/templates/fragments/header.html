@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light" th:fragment="header">
@@ -31,7 +32,7 @@
                         <a class="nav-link" href="/files">View Files</a>
                     </li>
 
-                    <li class="nav-item">
+                    <li sec:authorize="hasRole('ADMIN')" class="nav-item">
                         <a class="nav-link" href="/organisations">View Organisations</a>
                     </li>
 
