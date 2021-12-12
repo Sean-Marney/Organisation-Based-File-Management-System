@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Files</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
     <div th:replace="fragments/header :: header"/>
 </head>
 <body>
@@ -20,6 +21,7 @@
             <tr>
                 <th scope="col"><b>File Names</b></th>
                 <th scope="col"><b>Files</b></th>
+                <th scope="col"><b>Viewers</b></th>
             </tr>
             </thead>
             <tbody>
@@ -29,6 +31,9 @@
                     <a class="mr-3" th:href="@{/files/view/} + ${file}">View</a>
                     <a class="mr-3" th:href="@{/files/download/} + ${file}">Download</a>
                     <a th:href="@{/files/file-access/} + ${file}">Set File Access</a>
+                </td>
+                <td>
+                    <a class="mr-3" th:href="@{/files/views/} + ${file}">Views</a>
                 </td>
             </tr>
             </tbody>
@@ -46,6 +51,7 @@
             <tr>
                 <th scope="col"><b>File Names</b></th>
                 <th scope="col"><b>Files</b></th>
+                <th scope="col"><b>Viewers</b></th>
             </tr>
             <tbody>
             <tr th:each="file : ${listOfPublicFiles}">
@@ -54,9 +60,11 @@
                     <a class="mr-3" th:href="@{/files/view/} + ${file}">View</a>
                     <a class="mr-3" th:href="@{/files/download/} + ${file}">Download</a>
                 </td>
+                <td><a class="mr-3" th:href="@{/files/views/} + ${file}">Views</a></td>
             </tr>
             </tbody>
-        </table><br>
+        </table>
+        <br>
     </div>
 
     <div>
@@ -66,6 +74,7 @@
             <tr>
                 <th scope="col"><b>File Names</b></th>
                 <th scope="col"><b>Files</b></th>
+                <th scope="col"><b>Viewers</b></th>
             </tr>
             <tbody>
             <tr th:each="file : ${listOfOrganisationFiles}">
@@ -74,10 +83,12 @@
                     <a class="mr-3" th:href="@{/files/view/} + ${file}">View</a>
                     <a class="mr-3" th:href="@{/files/download/} + ${file}">Download</a>
                 </td>
+                <td><a class="mr-3" th:href="@{/files/views/} + ${file}">Views</a></td>
             </tr>
             </tbody>
         </table>
-    </div><br>
+    </div>
+    <br>
 
     <div>
         <h1>Partner Organisation Files</h1>
@@ -86,6 +97,7 @@
             <tr>
                 <th scope="col"><b>File Names</b></th>
                 <th scope="col"><b>Files</b></th>
+                <th scope="col"><b>Viewers</b></th>
             </tr>
             <tbody>
             <tr th:each="file : ${listOfPartnerOrganisationFiles}">
@@ -94,6 +106,7 @@
                     <a class="mr-3" th:href="@{/files/view/} + ${file}">View</a>
                     <a class="mr-3" th:href="@{/files/download/} + ${file}">Download</a>
                 </td>
+                <td><a class="mr-3" th:href="@{/files/views/} + ${file}">Views</a></td>
             </tr>
             </tbody>
         </table>
