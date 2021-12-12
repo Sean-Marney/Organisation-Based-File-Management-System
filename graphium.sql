@@ -21,8 +21,8 @@ DROP table IF EXISTS `graphium`.`users` ;
 CREATE TABLE IF NOT EXISTS `graphium`.`users` (
                                                   `user_id` INT(10) NOT NULL AUTO_INCREMENT,
                                                   `username` VARCHAR(20) NOT NULL,
-                                                  `first_name` VARCHAR(50) NOT NULL,
-                                                  `last_name` VARCHAR(50) NOT NULL,
+#                                                   `first_name` VARCHAR(50) NOT NULL,
+#                                                   `last_name` VARCHAR(50) NOT NULL,
                                                   `pass` VARCHAR(80) NULL DEFAULT NULL,
                                                   `enabled` TINYINT(4) NULL DEFAULT 1,
                                                   `role` VARCHAR(50) NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `graphium`.`users` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `graphium`.`organisations`(
                                                          `organisation_id` BIGINT(10) NOT NULL AUTO_INCREMENT,
-                                                         `organisation_description` VARCHAR(100) NOT NULL,
+                                                         `organisation_name` VARCHAR(100) NOT NULL,
                                                          PRIMARY KEY (`organisation_id`));
 -- -----------------------------------------------------
 -- Table `graphium`.`files`
@@ -51,6 +51,23 @@ CREATE TABLE IF NOT EXISTS `graphium`.`files`(
                                                  `file_name` VARCHAR(50) NOT NULL,
                                                  `file_object` LONGBLOB NOT NULL,
                                                  PRIMARY KEY (`file_id`));
+-- -----------------------------------------------------
+-- Table `graphium`.`partner_organisations`
+-- -----------------------------------------------------
+DROP table IF EXISTS `graphium`.`partner_organisations` ;
+CREATE TABLE IF NOT EXISTS `graphium`.`partner_organisations` (
+                                                                  `partner_organisation_id` INT(10) NOT NULL AUTO_INCREMENT,
+                                                                  `partner_organisation_name` VARCHAR(20) NOT NULL,
+                                                                  `organisation_id` BIGINT(10),
+                                                                  PRIMARY KEY	(`partner_organisation_id`),
+                                                                  INDEX `organisation_idx` (`organisation_id` ASC) ,
+                                                                  CONSTRAINT `fk_organisation_partner`
+                                                                      FOREIGN KEY (`organisation_id`)
+                                                                          REFERENCES `graphium`.`organisations` (`organisation_id`)
+                                                                          ON DELETE NO ACTION
+                                                                          ON UPDATE NO ACTION)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8;
 
 DELIMITER ;
 SET SQL_MODE=@OLD_SQL_MODE;
