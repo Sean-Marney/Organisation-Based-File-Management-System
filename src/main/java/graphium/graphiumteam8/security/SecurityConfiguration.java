@@ -57,6 +57,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/organisations/**").hasRole(UserRoles.ADMIN.name())
                 .antMatchers("/user/**").hasRole(UserRoles.USER.name()) //this line works
                 .and()
+                .csrf()
+                .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
                 .defaultSuccessUrl("/login-success");
@@ -74,5 +76,3 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         );
     }
 }
-
-

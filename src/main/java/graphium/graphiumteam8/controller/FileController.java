@@ -40,9 +40,7 @@ public class FileController {
 
         // User's public files ( TODO: find a way to let others see the files depending on access - secure methods so that only those roles can access it)
         model.addAttribute("listOfPublicFiles", fileService.getPublicFiles().stream().map(File::getFileName).collect(Collectors.toList()));
-
         model.addAttribute("listOfOrganisationFiles", fileService.getOrganisationFiles().stream().map(File::getFileName).collect(Collectors.toList()));
-
         model.addAttribute("listOfPartnerOrganisationFiles", fileService.getPartnerOrganisationFiles().stream().map(File::getFileName).collect(Collectors.toList()));
 
         return "files";
@@ -120,7 +118,8 @@ public class FileController {
                         )
                 )
                 .collect(Collectors.toMap(FileViewModel::getUsername, p -> p, (p, d) -> p)) // Distinct get
-                .values()));
+                .values())
+        );
         return "file-viewers";
     }
 }
