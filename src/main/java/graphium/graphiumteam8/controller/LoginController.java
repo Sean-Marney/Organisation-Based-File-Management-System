@@ -18,11 +18,23 @@ public class LoginController {
     public String loginSuccess() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(auth.getAuthorities());
-
-        return "redirect:/";
+        switch (((User) auth.getPrincipal()).getRole()) {
+            case USER: {
+                System.out.println("It's a User");
+                return "redirect:/user";
+            }
+            case ORGANISATION: {
+                System.out.println("It's a Organisation");
+                return "redirect:/organisation";
+            }
+            case ADMIN: {
+                System.out.println("It's an Admin");
+                return "redirect:/management";
+            }
+        }
+        return "redirect:error";
     }
 }
-
 
 
 
