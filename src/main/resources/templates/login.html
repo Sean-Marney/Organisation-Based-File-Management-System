@@ -29,6 +29,11 @@
             <!--        <label for="password">Password</label>-->
             <input class="form-control mb-4" id="password" name="password" placeholder="Password" type="password">
 
+            <!--Protecting against CSRF attacks during login using CSRF hidden field on login page-->
+            <input type="hidden"
+                    name="${_csrf.parameterName}"
+                    value="${_csrf.token}"/>
+
             <button class="btn btn-block my-4 btn-primary" type="submit">Sign in</button>
         </fieldset>
 

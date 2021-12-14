@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="graphium@localhost" uuid="a76b50c5-4e29-40c8-b570-759ccac59ca5">
+    <data-source source="LOCAL" name="graphium@localhost" uuid="852a69d0-a7b3-46dc-8074-2db2ddb35edf">
       <driver-ref>mariadb</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
