@@ -52,19 +52,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                .and()
                 .authorizeRequests()
                 .antMatchers("/login", "/css/*","/register")
                 .permitAll()
                 .antMatchers("/organisations/**").hasRole(UserRoles.ADMIN.name())
                 .antMatchers("/user/**").hasRole(UserRoles.USER.name()) //this line works
                 .and()
-                .csrf()
+                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
-                .defaultSuccessUrl("/login-success");
+                .defaultSuccessUrl("/login-success")
+                .and()
+                .headers()
+                .xssProtection()
+                .and()
+                .contentSecurityPolicy("script-src 'self'");
     }
     @Bean
     @Override
