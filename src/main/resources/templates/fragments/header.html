@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light" th:fragment="header">
@@ -22,33 +21,21 @@
             <div class="links-custom collapse navbar-collapse" id="navbarsExample04">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
 
-                    <li sec:authorize="isAnonymous()"class="nav-item">
+                    <li class="nav-item">
                         <a aria-current="page" class="nav-link" th:href="@{/register}">Register</a>
                     </li>
-                    <li sec:authorize="isAnonymous()"class="nav-item">
-                        <a aria-current="page" class="nav-link" th:href="@{/login}">Login</a>
-                    </li>
-                    <li sec:authorize="isAuthenticated()"class="nav-item">
-                        <a aria-current="page" class="nav-link" th:href="@{/logout}">Logout</a>
-                    </li>
 
-                    <li sec:authorize="isAuthenticated()" class="nav-item">
+                    <li class="nav-item">
                         <a aria-current="page" class="nav-link" th:href="@{/files/upload}">Upload File</a>
                     </li>
 
-                    <li sec:authorize="isAuthenticated()"class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" th:href="@{/files}">View Files</a>
                     </li>
 
-                    <li sec:authorize="hasRole('ADMIN')" class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" th:href="@{/organisations}">View Organisations</a>
                     </li>
-<!--                    <li sec:authorize="hasRole('ADMIN')" class="nav-item">-->
-<!--                        <a class="nav-link" th:href="@{/management}">Manage Users</a>-->
-<!--                    </li>-->
-
-
-
 
                     <!--
                     <li class="nav-item dropdown">

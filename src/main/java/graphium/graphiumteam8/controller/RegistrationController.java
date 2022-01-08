@@ -17,6 +17,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class RegistrationController {
+
     private final PasswordEncoder encoder;
     private final UserService userService;
     private final OrganisationService organisationService;

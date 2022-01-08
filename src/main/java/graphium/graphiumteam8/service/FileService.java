@@ -82,7 +82,7 @@ public class FileService {
                 .body(file.getFileObject());
     }
 
-    protected void addView(File file) {
+    private void addView(File file) {
         final User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         final FileView e = new FileView();
         e.setUser(principal);
