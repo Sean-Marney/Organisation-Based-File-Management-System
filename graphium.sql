@@ -1,76 +1,48 @@
--- MySQL Workbench Forward Engineering
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
--- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
--- -----------------------------------------------------
--- Schema graphium
--- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `graphium` ;
--- -----------------------------------------------------
--- Schema graphium
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `graphium` DEFAULT CHARACTER SET utf8 ;
+CREATE DATABASE IF NOT EXISTS graphium;
 USE `graphium` ;
--- -----------------------------------------------------
--- Table `graphium`.`users`
--- -----------------------------------------------------
--- DROP table IF EXISTS `graphium`.`users` ;
-CREATE TABLE IF NOT EXISTS `graphium`.`users` (
-  `user_id` INT(10) NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(20) NOT NULL,
-  -- `first_name` VARCHAR(50) NOT NULL,
---   `last_name` VARCHAR(50) NOT NULL,
-  `pass` VARCHAR(80) NULL DEFAULT NULL,
-  `enabled` TINYINT(4) NULL DEFAULT 1,
-  `role` VARCHAR(50) NOT NULL,
-  `organisation_id` BIGINT(10),
-  PRIMARY KEY	(`user_id`),
-  INDEX `organisation_idx` (`organisation_id` ASC) ,
-  CONSTRAINT `fk_organisation_user1`
-    FOREIGN KEY (`organisation_id`)
-    REFERENCES `graphium`.`organisations` (`organisation_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
--- -----------------------------------------------------
--- Table `graphium`.`organisations`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `graphium`.`organisations`(
-`organisation_id` BIGINT(10) NOT NULL AUTO_INCREMENT,
-`organisation_name` VARCHAR(100) NOT NULL,
-PRIMARY KEY (`organisation_id`));
--- -----------------------------------------------------
--- Table `graphium`.`files`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `graphium`.`files`(
-`file_id` BIGINT(10) NOT NULL AUTO_INCREMENT,
-`file_name` VARCHAR(50) NOT NULL,
-`file_object` LONGBLOB NOT NULL,
-PRIMARY KEY (`file_id`));
 
--- -----------------------------------------------------
--- Table `graphium`.`partner_organisations`
--- -----------------------------------------------------
-DROP table IF EXISTS `graphium`.`partner_organisations` ;
-CREATE TABLE IF NOT EXISTS `graphium`.`partner_organisations` (
-  `partner_organisation_id` INT(10) NOT NULL AUTO_INCREMENT,
-  `partner_organisation_name` VARCHAR(20) NOT NULL,
-  `organisation_id` BIGINT(10),
-  PRIMARY KEY	(`partner_organisation_id`),
-  INDEX `organisation_idx` (`organisation_id` ASC) ,
-  CONSTRAINT `fk_organisation_partner`
-    FOREIGN KEY (`organisation_id`)
-    REFERENCES `graphium`.`organisations` (`organisation_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE `file_views` (
+  `id` binary(255) NOT NULL,
+  `last` datetime(6) DEFAULT NULL,
+  `user_user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ;
 
-DELIMITER ;
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+CREATE TABLE `files_views` (
+  `file_file_id` int(11) NOT NULL,
+  `views_id` binary(255) NOT NULL
+) ;
+
+CREATE TABLE `files` (
+  `file_id` int(11) NOT NULL,
+  `access_type` varchar(255) DEFAULT NULL,
+  `file_name` varchar(255) DEFAULT NULL,
+  `file_object` longblob DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`file_id`)
+) ;
+
+CREATE TABLE `organisations` (
+  `organisation_id` int(11) NOT NULL AUTO_INCREMENT,
+  `organisation_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`organisation_id`)
+) ;
+
+CREATE TABLE `partner_organisations` (
+  `partner_organisation_id` int(11) NOT NULL AUTO_INCREMENT,
+  `partner_organisation_name` varchar(255) DEFAULT NULL,
+  `organisation_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`partner_organisation_id`)
+) ;
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `enabled` bit(1) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` varchar(255) DEFAULT NULL,
+  `username` varchar(255) NOT NULL,
+  `organisation_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ;
