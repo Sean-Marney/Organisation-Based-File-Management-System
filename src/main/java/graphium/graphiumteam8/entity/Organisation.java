@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +23,9 @@ public class Organisation {
     @Column(name = "organisation_id")
     private Integer id;
 
+    @NotNull
+    @Size(min = 2, max = 30)
+    @Pattern(regexp = "<>’”&/")
     private String organisationName;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
