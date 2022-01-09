@@ -48,7 +48,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
-                .defaultSuccessUrl("/login-success");
+                .defaultSuccessUrl("/login-success")
+                // Configuring XSS protection with content security policy
+                .and()
+                .headers()
+                .xssProtection()
+                .and()
+                .contentSecurityPolicy("script-src 'self'");
+
     }
 }
 
