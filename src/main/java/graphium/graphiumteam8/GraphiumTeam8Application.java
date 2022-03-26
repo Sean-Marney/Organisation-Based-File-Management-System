@@ -11,12 +11,12 @@ public class GraphiumTeam8Application {
     public static void main(String[] args) {
         SpringApplication.run(GraphiumTeam8Application.class, args);
 
-        String rawPassword = "pass";
-
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String encodedPassword = encoder.encode(rawPassword);
-
-        System.out.println(encodedPassword);
+//        String rawPassword = "pass";
+//
+//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//        String encodedPassword = encoder.encode(rawPassword);
+//
+//        System.out.println(encodedPassword);
     }
 
 
