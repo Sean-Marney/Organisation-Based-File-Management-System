@@ -15,7 +15,7 @@ public class GraphiumTeam8Application {
 //
 //        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 //        String encodedPassword = encoder.encode(rawPassword);
-//
+
 //        System.out.println(encodedPassword);
     }
 

@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RegistrationController {
 
-//    private final PasswordEncoder encoder;
+    private final PasswordEncoder encoder;
     private final UserService userService;
     private final OrganisationService organisationService;
 
@@ -43,7 +43,7 @@ public class RegistrationController {
 
         user.setRole(Role.USER);
         user.setEnabled(true);
-//        user.setPassword(encoder.encode(user.getPassword()));
+        user.setPassword(encoder.encode(user.getPassword()));
 
         userService.saveUser(user); // Save new user to database
 
