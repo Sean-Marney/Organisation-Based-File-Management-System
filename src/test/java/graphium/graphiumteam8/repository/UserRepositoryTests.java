@@ -30,7 +30,7 @@
 //
 //        User saveUser = userRepository.save(user);
 //
-//        User newUser = testEntityManager.find(User.class, saveUser.getId());
+//        User newUser = testEntityManager.find(User.class, saveUser.getUser_id());
 //
 //        Assertions.assertThat(newUser.getUsername()).isEqualTo(user.getUsername());
 //    }

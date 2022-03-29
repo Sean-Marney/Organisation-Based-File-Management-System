@@ -8,7 +8,7 @@ CREATE TABLE `file_views` (
   PRIMARY KEY (`id`)
 ) ;
 
-CREATE TABLE `files_views` (
+CREATE TABLE `files_view` (
   `file_file_id` int(11) NOT NULL,
   `views_id` binary(255) NOT NULL
 ) ;
