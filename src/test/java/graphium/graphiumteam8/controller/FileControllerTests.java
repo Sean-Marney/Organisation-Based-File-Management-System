@@ -36,17 +36,17 @@ public class FileControllerTests {
 //
 //    }
 
-    @Test
-    @DisplayName("File download test")
-    void shouldDownloadAFile() throws Exception {
-
-        MockMultipartFile mockMultipartFile = new MockMultipartFile(
-                "file",
-                "test-file.txt",
-                "text/plain",
-                "Content"
-                        .getBytes()
-        );
-        this.mockMvc.perform(MockMvcRequestBuilders.multipart("/download"));
-    }
+//    @Test
+//    @DisplayName("File download test")
+//    void shouldDownloadAFile() throws Exception {
+//
+//        MockMultipartFile mockMultipartFile = new MockMultipartFile(
+//                "file",
+//                "test-file.txt",
+//                "text/plain",
+//                "Content"
+//                        .getBytes()
+//        );
+//        this.mockMvc.perform(MockMvcRequestBuilders.multipart("/download"));
+//    }
 }
