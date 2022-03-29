@@ -1,7 +1,6 @@
 package graphium.graphiumteam8.service;
 
 import graphium.graphiumteam8.entity.File;
-import graphium.graphiumteam8.entity.FileView;
 import graphium.graphiumteam8.entity.User;
 import graphium.graphiumteam8.repository.FileRepository;
 import lombok.Data;
@@ -74,7 +73,7 @@ public class FileService {
 
         String fileType = httpServletRequest.getServletContext().getMimeType(file.getFileName());
 
-        addView(file);
+//        addView(file);
         fileRepository.save(file);
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(fileType))
@@ -82,12 +81,12 @@ public class FileService {
                 .body(file.getFileObject());
     }
 
-    private void addView(File file) {
-        final User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        final FileView e = new FileView();
-        e.setUser(principal);
-        file.getViews().add(e);
-    }
+//    private void addView(File file) {
+//        final User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        final FileView e = new FileView();
+//        e.setUser(principal);
+//        file.getViews().add(e);
+//    }
 
     public ResponseEntity<byte[]> downloadFile(@PathVariable String fileName, HttpServletRequest httpServletRequest) {
         File file = fileRepository.findByFileName(fileName).orElse(null);

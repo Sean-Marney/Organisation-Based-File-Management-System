@@ -104,23 +104,23 @@ public class FileController {
         return fileService.downloadFile(fileName, httpServletRequest);
     }
 
-    @GetMapping("/files/views/{filename}")
-    public String fileViews(@PathVariable String filename, Model model) {
-        final File file = fileService.getFileRepository().findByFileName(filename).orElse(null);
-        assert file != null;
-        model.addAttribute("views", new ArrayList<>(file.getViews()
-                .stream()
-                .map(it -> new FileViewModel(
-                                it.getUser().getUsername(),
-                                it.getLast().toString(),
-                                file.getViews()
-                                        .stream()
-                                        .filter(t -> t.getUser().equals(SecurityContextHolder.getContext().getAuthentication().getPrincipal()))
-                                        .count() + ""
-                        )
-                )
-                .collect(Collectors.toMap(FileViewModel::getUsername, p -> p, (p, d) -> p)) // Distinct get
-                .values()));
-        return "file-viewers";
-    }
+//    @GetMapping("/files/views/{filename}")
+//    public String fileViews(@PathVariable String filename, Model model) {
+//        final File file = fileService.getFileRepository().findByFileName(filename).orElse(null);
+//        assert file != null;
+//        model.addAttribute("views", new ArrayList<>(file.getViews()
+//                .stream()
+//                .map(it -> new FileViewModel(
+//                                it.getUser().getUsername(),
+//                                it.getLast().toString(),
+//                                file.getViews()
+//                                        .stream()
+//                                        .filter(t -> t.getUser().equals(SecurityContextHolder.getContext().getAuthentication().getPrincipal()))
+//                                        .count() + ""
+//                        )
+//                )
+//                .collect(Collectors.toMap(FileViewModel::getUsername, p -> p, (p, d) -> p)) // Distinct get
+//                .values()));
+//        return "file-viewers";
+//    }
 }

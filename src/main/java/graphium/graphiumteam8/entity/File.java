@@ -31,8 +31,8 @@ public class File {
     @Enumerated(EnumType.STRING)
     private FileAccessType accessType = FileAccessType.PRIVATE;
 
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
-    private List<FileView> views;
+//    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+//    private List<FileView> views;
 
     public enum FileAccessType {
         PRIVATE, PUBLIC, PARTNER, ORGANISATION

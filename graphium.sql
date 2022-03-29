@@ -1,18 +1,6 @@
 CREATE DATABASE IF NOT EXISTS graphium;
 USE `graphium` ;
 
-CREATE TABLE `file_views` (
-  `id` binary(255) NOT NULL,
-  `last` datetime(6) DEFAULT NULL,
-  `user_user_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ;
-
-CREATE TABLE `files_view` (
-  `file_file_id` int(11) NOT NULL,
-  `views_id` binary(255) NOT NULL
-) ;
-
 CREATE TABLE `files` (
   `file_id` int(11) NOT NULL,
   `access_type` varchar(255) DEFAULT NULL,
