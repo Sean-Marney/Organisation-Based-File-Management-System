@@ -23,7 +23,7 @@ public class Organisation {
     @Column(name = "organisation_id")
     private Integer id;
 
-    @NotNull
+    //@NotNull
     @Size(min = 2, max = 30)
     @Pattern(regexp = "^[a-zA-Z0-9.\\-\\/+=@_ ]*$")
     private String organisationName;
